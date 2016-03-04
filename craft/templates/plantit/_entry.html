@@ -1,0 +1,275 @@
+{#
+ # News entry template
+ # -------------------
+ #
+ # This template gets loaded whenever a News entry’s URL is
+ # requested. That’s because the News section’s Template setting is
+ # set to “news/_entry”, the path to this template.
+ #
+ # When this template is loaded, it will already have an ‘entry’
+ # variable, set to the requested News entry.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+
+{% block content %}
+<section class="hb-header hb-plantit hide-for-print">
+				    	<div class="row">
+				    		<div class="small-12 columns">
+				    			<div class="hb-header-inner">
+				    				<h1>Plant It</h1>
+				    				<p class="hb-header-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie convallis vestibulum. Etiam iaculis euismod orci, id ultricies augue malesuada nec. Maecenas ut nulla at risus aliquam efficitur.</p>
+				    			</div>
+				    		</div>
+				    	</div>	
+				    </section>
+				    
+				    <section class="hb-main-content">
+				    	<div class="row">
+				    	
+				    		<div class="small-12 medium-4 large-3 columns hide-for-print">
+				    			<div class="side-nav-wrapper callout">
+				    				<h4>Zoeken op naam</h4>
+				    				<!-- Zoeken op naam form -->
+				    				<form>
+				    					<div class="row">
+				    					    <div class="medium-12 columns">
+				    					        <input type="text" placeholder="Zoeken">
+				    					    </div>
+				    				  	</div>
+				    				  	<a class="expanded secondary button" href="#">Zoeken</a>
+				    				</form>
+				    				<br>
+				    				<!-- Zoeken op criteria form -->
+				    				<h4>Zoeken op criteria</h4>
+				    
+				    				<form> 	
+				    
+				    				  	<fieldset class="fieldset">
+				    						<legend>Oorsprong</legend>
+				    						<input id="checkbox12" type="radio" name="oorsprong"><label for="checkbox12">Inheems</label><br>
+				    						<input id="checkbox22" type="radio" name="oorsprong"><label for="checkbox22">Uitheems</label>
+				    					</fieldset>
+				    
+				    					<label>Groep
+				    					  <select>
+				    					    <option value="Heesters">Heesters</option>
+				    					    <option value="Coniferen">Coniferen</option>
+				    					    <option value="Vaste Planten">Vaste Planten</option>
+				    					    <option value="Bomen">Bomen</option>
+				    					    <option value="Fruitbomen">Fruitbomen</option>
+				    					    <option value="Kruiden">Kruiden</option>
+				    					    <option value="Grassen">Grassen</option>
+				    					    <option value="Landbouwgewassen">Landbouwgewassen</option>
+				    					  </select>
+				    					</label>
+				    
+				    					<label>Bloemkleur
+				    					  <select>
+				    					    <option value="Geel">Geel</option>
+				    					    <option value="Blauw">Blauw</option>
+				    					    <option value="Rood">Rood</option>
+				    					    <option value="Groen">Groen</option>
+				    					    <option value="Roze">Roze</option>
+				    					    <option value="Wit">Wit</option>
+				    					    <option value="Paars">Paars</option>
+				    					    <option value="Oranje">Oranje</option>
+				    					  </select>
+				    					</label>
+				    
+				    					<label>Bloeimaand
+				    					  <select>
+				    					    <option value="Januari">Januari</option>
+				    					    <option value="Februari">Februari</option>
+				    					    <option value="Maart">Maart</option>
+				    					    <option value="April">April</option>
+				    					    <option value="Mei">Mei</option>
+				    					    <option value="Juni">Juni</option>
+				    					    <option value="Juli">Juli</option>
+				    					    <option value="Augustus">Augustus</option>
+				    					    <option value="September">September</option>
+				    					    <option value="Oktober">Oktober</option>
+				    					    <option value="November">November</option>
+				    					    <option value="December">December</option>
+				    					  </select>
+				    					</label>
+				    
+				    					<fieldset class="fieldset">
+				    						<legend>Hoogte (in cm)</legend>
+				    						<div class="small-12 columns">
+				    						  <div class="slider" data-slider data-start="0" data-end="200" data-initial-start="100" data-step="20" data-decimal="0">
+				    						    <span class="slider-handle"  data-slider-handle role="slider" tabindex="1" aria-controls="sliderOutput"></span>
+				    						    <span class="slider-fill" data-slider-fill></span>
+				    						  </div>
+				    						</div>
+				    						<div class="small-12 columns">	
+				    						  <input type="number" id="sliderOutput">
+				    						</div>
+				    					</fieldset>
+				    
+				    					<fieldset class="fieldset">
+				    						<legend>Habitat</legend>
+				    						
+				    						<label>Licht
+				    						  <select>
+				    						    <option value="Zon">Zon</option>
+				    						    <option value="Half-Schaduw">Half-Schaduw</option>
+				    						    <option value="Schaduw">Schaduw</option>
+				    						  </select>
+				    						</label>
+				    
+				    						<label>Grondsoort
+				    						  <select>
+				    						    <option value="Zand">Zand</option>
+				    						    <option value="Leem">Leem</option>
+				    						    <option value="Klei">Klei</option>
+				    						    <option value="Veen">Veen</option>
+				    						  </select>
+				    						</label>
+				    
+				    						<label>PH
+				    						  <select>
+				    						    <option value="Zand">Zuurminnend</option>
+				    						    <option value="Leem">Neutraal</option>
+				    						    <option value="Klei">Kalkminnend</option>
+				    						  </select>
+				    						</label>
+				    
+				    						<label>Vochtigheid
+				    						  <select>
+				    						    <option value="Zand">Droog</option>
+				    						    <option value="Leem">Gemiddeld</option>
+				    						    <option value="Klei">Vochthoudend</option>
+				    						    <option value="Klei">sterk wisselende omstandigheden</option>
+				    						    <option value="Klei">regelmatig overstroomde bodems</option>
+				    						  </select>
+				    						</label>
+				    
+				    					</fieldset>
+				    
+				    					<fieldset class="fieldset">
+				    					  <legend>Bijenvriendelijkheid</legend>
+				    					  <input id="Nectarleverancier" type="checkbox"><label for="Nectarleverancier">Nectarleverancier</label><br>
+				    					  <input id="Pollenleverancier" type="checkbox"><label for="Pollenleverancier">Pollenleverancier</label><br>
+				    					  <input id="npleverancier" type="checkbox"><label for="npleverancier" class="pollen">Nectar- en pollenleverancier</label><br>
+				    					</fieldset>
+				    
+				    					<a class="expanded secondary button" href="#">Zoeken</a>
+				    
+				    				</form> 
+				    			</div>
+				    		</div>
+				    
+				    		<div class="small-12 medium-8 large-9 columns">
+				    			<h3 class="article-title">Spaanse aak</h3>
+				    			
+				    			<!-- Start 2 Kolommen -->
+				    			<div class="row">
+				    				<div class="small-12 medium-5 columns">
+				    
+				    				<div class="plantit-slider">
+				    				    <div><img class="article-image" src="http://placehold.it/500x500/d90000" alt=""></div>
+				    				    <div><img class="article-image" src="http://placehold.it/500x500/00d952" alt=""></div>
+				    				    <div><img class="article-image" src="http://placehold.it/500x500/FF99FF" alt=""></div>
+				    				    <div><img class="article-image" src="http://placehold.it/500x500/00d952" alt=""></div>
+				    				    <div><img class="article-image" src="http://placehold.it/500x500/FF99FF" alt=""></div>
+				    				</div>
+				    
+				    				<div class="plantit-slider-nav slick-slider">
+				    				  	<div><img class="article-image" src="http://placehold.it/500x500/d90000" alt=""></div>
+				    				    <div><img class="article-image" src="http://placehold.it/500x500/00d952" alt=""></div>
+				    				    <div><img class="article-image" src="http://placehold.it/500x500/FF99FF" alt=""></div>
+				    				    <div><img class="article-image" src="http://placehold.it/500x500/00d952" alt=""></div>
+				    				    <div><img class="article-image" src="http://placehold.it/500x500/FF99FF" alt=""></div>
+				    				</div>
+				    
+				    				</div>
+				    				<div class="small-12 medium-7 columns">
+				    					<table class="hover">
+				    					  <tbody>
+				    					    <tr>
+				    					      <td><strong>Latijnse Naam</strong></td>
+				    					      <td>Acer campestre</td>
+				    					    </tr>
+				    					    <tr>
+				    					      <td><strong>Naam</strong></td>
+				    					      <td>Spaanse Aak</td>
+				    					    </tr>
+				    					    <tr>
+				    					      <td><strong>Oorsprong</strong></td>
+				    					      <td>Inheems</td>
+				    					    </tr>
+				    					    <tr>
+				    					      <td><strong>Familie</strong></td>
+				    					      <td>Sapindaceae</td>
+				    					    </tr>
+				    					    <tr>
+				    					      <td><strong>Groep</strong></td>
+				    					      <td>Bomen</td>
+				    					    </tr>
+				    					    <tr>
+				    					      <td><strong>Bloemkleur</strong></td>
+				    					      <td>Geel</td>
+				    					    </tr>
+				    					    <tr>
+				    					      <td><strong>Bloemkleurdetail</strong></td>
+				    					      <td>Groengele bloemen</td>
+				    					    </tr>
+				    					    <tr>
+				    					      <td><strong>Bladkleur</strong></td>
+				    					      <td>lichtgroene bladeren, kleiner dan die van de Gewone esdoorn en van de Noorse esdoorn</td>
+				    					    </tr>
+				    					    <tr>
+				    					      <td><strong>Bloeimaand</strong></td>
+				    					      <td>mei, juni</td>
+				    					    </tr>
+				    					    <tr>
+				    					      <td><strong>Hoogte</strong></td>
+				    					      <td>>200cm</td>
+				    					    </tr>
+				    					    <tr>
+				    					      <td><strong>Hoogtedetail</strong></td>
+				    					      <td>20 m</td>
+				    					    </tr>
+				    					    <tr>
+				    					      <td><strong>Habitat - Licht</strong></td>
+				    					      <td>Halfschaduw</td>
+				    					    </tr>
+				    					    <tr>
+				    					      <td><strong>Habitat - grondsoort</strong></td>
+				    					      <td>Leem</td>
+				    					    </tr>
+				    					    <tr>
+				    					      <td><strong>Habitat - pH</strong></td>
+				    					      <td>Neutraal</td>
+				    					    </tr>
+				    					    <tr>
+				    					      <td><strong>Habitat - Vochtigheid</strong></td>
+				    					      <td>Gemiddeld</td>
+				    					    </tr>
+				    					    <tr>
+				    					      <td><strong>Bijenvriendelijkheid</strong></td>
+				    					      <td>nectar- en pollenleverancier</td>
+				    					    </tr>
+				    					    <tr>
+				    					      <td><strong>Bijenvriendelijkheidsdetail</strong></td>
+				    					      <td>>500 kg/ha nectar en 26-50 kg/ha pollen</td>
+				    					    </tr>
+				    					    <tr>
+				    					      <td><strong>Referenties</strong></td>
+				    					      <td>Bijenplantengids (F.J.Jacobs, K.Beeuwsaert, B.Rotthier)<br>Plants for bees (W.D.J.Kirk, F.N.Howes)</td>
+				    					    </tr>
+				    
+				    					  </tbody>
+				    					</table>
+				    				</div>
+				    			</div>
+				    			<!-- Einde 2 Kolommen -->
+				    
+				    		</div>
+				    	</div>
+				    </section>
+{% endblock %}

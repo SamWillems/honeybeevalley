@@ -1,0 +1,176 @@
+{# # Layout template # --------------- # # This template defines your site’s global layout. It can be # “extended” by other templates to fill in the gaps. # # See Twig’s Template Inheritance documentation for more details: # http://twig.sensiolabs.org/doc/templates.html#template-inheritance #}
+<!doctype html>
+<html class="no-js" lang="nl">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honeybee Valley</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Bree+Serif' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <!-- Enkel Voor plantit -->
+    <link rel="stylesheet" type="text/css" href="assets/slick/slick.css" />
+    <!-- -->
+</head>
+
+<body>
+    <div class="off-canvas-wrapper">
+        <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+            <div class="off-canvas position-right" id="offCanvas" data-off-canvas data-position="right">
+                <button class="close-button" aria-label="Close menu" type="button" data-close="">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <img src="assets/img/global/hb-nav-logo.png" class="hb-oc-nav-logo" alt="HoneyBee Valley Logo">
+                <ul class="vertical menu oc-main-menu">
+                    <li><a href="#">Diensten</a></li>
+                    <li><a href="#">Know It</a></li>
+                    <li><a href="#">Do It</a></li>
+                    <li><a href="#">Plant It</a></li>
+                    <li><a href="#">Bee It</a></li>
+                    <li><a href="#">Manage It</a></li>
+                </ul>
+                <ul class="vertical menu oc-sub-menu">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Over ons</a></li>
+                    <li><a href="#">Partners</a></li>
+                    <li><a href="#">Onderzoeksthema's</a></li>
+                    <li><a href="#">Output</a></li>
+                    <li><a href="#">Kalender</a></li>
+                    <li><a href="#">Staff</a></li>
+                </ul>
+                <form class="oc-search">
+                    <div class="input-group">
+                        <span class="input-group-label"><i class="fa fa-search"></i></span>
+                        <input class="input-group-field" type="text" placeholder="Zoeken">
+                    </div>
+                </form>
+                <section class="oc-cal">
+                    <h1><i class="fa fa-calendar-o"></i> Kalender</h1>
+                    <h2><i class="fa fa-caret-right"></i> 23 Februari 2016</h2>
+                    <p class="oc-cal-short-desc">Lorem ipsum dolor sit amet. Condimentum mattis lacus semper.</p>
+                    <h2><i class="fa fa-caret-right"></i> 23 Februari 2016</h2>
+                    <p class="oc-cal-short-desc">Lorem ipsum dolor sit amet.</p>
+                    <h2><i class="fa fa-caret-right"></i> 23 Februari 2016</h2>
+                    <p class="oc-cal-short-desc">Lorem ipsum dolor sit amet.</p>
+                </section>
+            </div>
+            <div class="off-canvas-content" data-off-canvas-content>
+                <section class="login-bar hide-for-print">
+                    <div class="row">
+                        <div class="small-12 columns">
+                            <ul class="dropdown menu login-menu align-right" data-dropdown-menu>
+                                <li>
+                                    <a href="#"><i class="fa fa-globe"></i> <span><i class="fa fa-caret-down"></i></span></a>
+                                    <ul class="menu">
+                                        <li><a href="#">Nederlands</a></li>
+                                        <li><a href="#">Frans</a></li>
+                                        <li><a href="#">Engels</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-lock"></i> <span>Login</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <section class="navigation show-for-medium hide-for-print">
+                    <div class="row">
+                        <div class="medium-1 large-3 columns">
+                            <a href="index.html">
+                                <img data-interchange="[assets/img/global/hb-footer-logo.png, medium], [assets/img/global/hb-nav-logo.png, large]" class="hb-nav-logo" alt="HoneyBee Valley Logo">
+                            </a>
+                            <!-- Backup code als Interchange niet zou werken met het Foundation Build commando -->
+                            <!-- <img src="assets/img/global/hb-footer-logo.png" class="hb-nav-logo show-for-medium-only"> -->
+                            <!-- <img src="assets/img/global/hb-nav-logo.png" class="hb-nav-logo hide-for-medium-only"> -->
+                        </div>
+                        <div class="medium-11 large-9 columns">
+                            <!-- Actual nav items start here -->
+                            <div class="row">
+                                <div class="small-12 columns">
+                                    <ul class="menu float-right hb-sub-nav">
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="over.html">Over ons</a></li>
+                                        <li><a href="partners.html">Partners</a></li>
+                                        <li><a href="projectportfolios.html">Projectportfolio's</a></li>
+                                        <li><a href="output.html">Output</a></li>
+                                        <li><a href="kalender.html">Kalender</a></li>
+                                        <li><a href="staff.html">Staff</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="small-12 columns">
+                                    <ul class="menu float-right hb-main-nav">
+                                        <li><a href="diensten.html">Diensten</a></li>
+                                        <li><a href="knowit.html">Know It</a></li>
+                                        <li><a href="doit.html">Do It</a></li>
+                                        <li><a href="plantit.html">Plant It</a></li>
+                                        <li><a href="beeit.html">Bee It</a></li>
+                                        <li><a href="manageit.html">Manage It</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Nav items end here -->
+                        </div>
+                    </div>
+                </section>
+                <section class="show-for-small-only hide-for-print">
+                    <div class="title-bar">
+                        <div class="title-bar-right">
+                            <span class="title-bar-title">Menu</span>
+                            <button class="menu-icon" type="button" data-toggle="offCanvas"></button>
+                        </div>
+                    </div>
+                </section>
+                {% block content %}
+                <p>If you see me, you haven’t set your <code>{% verbatim %}{% block content %}…{% endblock %}{% endverbatim %}</code> yet.</p>
+                <p>See Twig’s <a href="http://twig.sensiolabs.org/doc/templates.html#template-inheritance">Template Inheritance</a> documentation for an explanation.</p>
+                {% endblock %}
+                <section class="footer hide-for-print">
+                    <div class="row">
+                        <div class="small-4 medium-2 columns">
+                            <img src="assets/img/global/hb-footer-logo.png" alt="HoneyBee Logo">
+                        </div>
+                        <div class="small-4 medium-3 columns">
+                            <ul class="menu vertical simple">
+                                <li><a href="over.html">Over ons</a></li>
+                                <li><a href="partners.html">Partners</a></li>
+                                <li><a href="onderzoeksthemas.html">Onderzoeksthema's</a></li>
+                            </ul>
+                            <ul class="menu vertical simple">
+                                <li><a href="output.html">Output</a></li>
+                                <li><a href="kalender.html">Kalender</a></li>
+                                <li><a href="staff.html">Staff</a></li>
+                            </ul>
+                        </div>
+                        <div class="small-4 medium-3 columns">
+                            <ul class="menu vertical footer-main-nav">
+                                <li><a href="diensten.html">Diensten</a></li>
+                                <li><a href="knowit.html">Know It</a></li>
+                                <li><a href="doit.html">Do It</a></li>
+                            </ul>
+                            <ul class="menu vertical footer-main-nav">
+                                <li><a href="plantit.html">Plant It</a></li>
+                                <li><a href="beeit.html">Bee It</a></li>
+                                <li><a href="manageit.html">Manage It</a></li>
+                            </ul>
+                        </div>
+                        <div class="small-12 medium-4 columns">
+                            <p>Honeybee Valley bundelt het wetenschappelijke bijenonderzoek aan de UGent en werkt samen met de landbouw en andere partners</p>
+                            <p>&copy; HoneyBee Valley</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/app.js"></script>
+    <script type="text/javascript" src="assets/slick/slick.min.js"></script>
+    <script type="text/javascript" src="assets/slick/plantit.js"></script>
+</body>
+
+</html>

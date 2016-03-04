@@ -1,0 +1,179 @@
+{#
+ # Homepage template
+ # ---------------
+ #
+ # When this template gets loaded, it will be because someone has accessed
+ # http://yoursite.com/ (without any URI). Craft checks to see if you have
+ # a Single section set to be the Homepage (as you do, by default), and
+ # loads the section’s Template (this file). A special ‘entry’ variable
+ # will already be set for you, assigned to the Homepage entry.
+ #
+ # It's worth noting that even if you didn't have a Homepage Single section,
+ # as long as this template remains at craft/templates/index.html, it
+ # would still be the one to get loaded when accessing http://yoursite.com/,
+ # albeit without an ‘entry’ variable already set for you.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+
+{% block content %}
+	<section class="hb-header hb-plantit hide-for-print">
+				    	<div class="row">
+				    		<div class="small-12 columns">
+				    			<div class="hb-header-inner">
+				    				<h1>Plant It</h1>
+				    				<p class="hb-header-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie convallis vestibulum. Etiam iaculis euismod orci, id ultricies augue malesuada nec. Maecenas ut nulla at risus aliquam efficitur.</p>
+				    			</div>
+				    		</div>
+				    	</div>	
+				    </section>
+				    
+				    <section class="hb-main-content">
+				    	<div class="row">
+				    	
+				    		<div class="small-12 medium-4 large-3 columns hide-for-print">
+				    			<div class="side-nav-wrapper callout">
+				    				<h4>Zoeken op naam</h4>
+				    				<!-- Zoeken op naam form -->
+				    				<form>
+				    					<div class="row">
+				    					    <div class="medium-12 columns">
+				    					        <input type="text" placeholder="Zoeken">
+				    					    </div>
+				    				  	</div>
+				    				  	<a class="expanded secondary button" href="#">Zoeken</a>
+				    				</form>
+				    				<br>
+				    				<!-- Zoeken op criteria form -->
+				    				<h4>Zoeken op criteria</h4>
+				    
+				    				<form> 	
+				    
+				    				  	<fieldset class="fieldset">
+				    						<legend>Oorsprong</legend>
+				    						<input id="checkbox12" type="radio" name="oorsprong"><label for="checkbox12">Inheems</label><br>
+				    						<input id="checkbox22" type="radio" name="oorsprong"><label for="checkbox22">Uitheems</label>
+				    					</fieldset>
+				    
+				    					<label>Groep
+				    					  <select>
+				    					    <option value="Heesters">Heesters</option>
+				    					    <option value="Coniferen">Coniferen</option>
+				    					    <option value="Vaste Planten">Vaste Planten</option>
+				    					    <option value="Bomen">Bomen</option>
+				    					    <option value="Fruitbomen">Fruitbomen</option>
+				    					    <option value="Kruiden">Kruiden</option>
+				    					    <option value="Grassen">Grassen</option>
+				    					    <option value="Landbouwgewassen">Landbouwgewassen</option>
+				    					  </select>
+				    					</label>
+				    
+				    					<label>Bloemkleur
+				    					  <select>
+				    					    <option value="Geel">Geel</option>
+				    					    <option value="Blauw">Blauw</option>
+				    					    <option value="Rood">Rood</option>
+				    					    <option value="Groen">Groen</option>
+				    					    <option value="Roze">Roze</option>
+				    					    <option value="Wit">Wit</option>
+				    					    <option value="Paars">Paars</option>
+				    					    <option value="Oranje">Oranje</option>
+				    					  </select>
+				    					</label>
+				    
+				    					<label>Bloeimaand
+				    					  <select>
+				    					    <option value="Januari">Januari</option>
+				    					    <option value="Februari">Februari</option>
+				    					    <option value="Maart">Maart</option>
+				    					    <option value="April">April</option>
+				    					    <option value="Mei">Mei</option>
+				    					    <option value="Juni">Juni</option>
+				    					    <option value="Juli">Juli</option>
+				    					    <option value="Augustus">Augustus</option>
+				    					    <option value="September">September</option>
+				    					    <option value="Oktober">Oktober</option>
+				    					    <option value="November">November</option>
+				    					    <option value="December">December</option>
+				    					  </select>
+				    					</label>
+				    
+				    					<fieldset class="fieldset">
+				    						<legend>Hoogte (in cm)</legend>
+				    						<div class="small-12 columns">
+				    						  <div class="slider" data-slider data-start="0" data-end="200" data-initial-start="100" data-step="20" data-decimal="0">
+				    						    <span class="slider-handle"  data-slider-handle role="slider" tabindex="1" aria-controls="sliderOutput"></span>
+				    						    <span class="slider-fill" data-slider-fill></span>
+				    						  </div>
+				    						</div>
+				    						<div class="small-12 columns">	
+				    						  <input type="number" id="sliderOutput">
+				    						</div>
+				    					</fieldset>
+				    
+				    					<fieldset class="fieldset">
+				    						<legend>Habitat</legend>
+				    						
+				    						<label>Licht
+				    						  <select>
+				    						    <option value="Zon">Zon</option>
+				    						    <option value="Half-Schaduw">Half-Schaduw</option>
+				    						    <option value="Schaduw">Schaduw</option>
+				    						  </select>
+				    						</label>
+				    
+				    						<label>Grondsoort
+				    						  <select>
+				    						    <option value="Zand">Zand</option>
+				    						    <option value="Leem">Leem</option>
+				    						    <option value="Klei">Klei</option>
+				    						    <option value="Veen">Veen</option>
+				    						  </select>
+				    						</label>
+				    
+				    						<label>PH
+				    						  <select>
+				    						    <option value="Zand">Zuurminnend</option>
+				    						    <option value="Leem">Neutraal</option>
+				    						    <option value="Klei">Kalkminnend</option>
+				    						  </select>
+				    						</label>
+				    
+				    						<label>Vochtigheid
+				    						  <select>
+				    						    <option value="Zand">Droog</option>
+				    						    <option value="Leem">Gemiddeld</option>
+				    						    <option value="Klei">Vochthoudend</option>
+				    						    <option value="Klei">sterk wisselende omstandigheden</option>
+				    						    <option value="Klei">regelmatig overstroomde bodems</option>
+				    						  </select>
+				    						</label>
+				    
+				    					</fieldset>
+				    
+				    					<fieldset class="fieldset">
+				    					  <legend>Bijenvriendelijkheid</legend>
+				    					  <input id="Nectarleverancier" type="checkbox"><label for="Nectarleverancier">Nectarleverancier</label><br>
+				    					  <input id="Pollenleverancier" type="checkbox"><label for="Pollenleverancier">Pollenleverancier</label><br>
+				    					  <input id="npleverancier" type="checkbox"><label for="npleverancier" class="pollen">Nectar- en pollenleverancier</label><br>
+				    					</fieldset>
+				    
+				    					<a class="expanded secondary button" href="#">Zoeken</a>
+				    
+				    				</form> 
+				    			</div>
+				    		</div>
+				    
+				    		<div class="small-12 medium-8 large-9 columns">
+				    			<h3 class="article-title">Gebruik van de Plant It databank</h3>
+				    			<div class="article-body-text">
+				    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porta et nulla ut venenatis. Suspendisse malesuada vestibulum imperdiet. Nullam vitae tincidunt purus. Etiam eu suscipit arcu, sed tincidunt odio. Phasellus vulputate sem ex, non tincidunt risus ullamcorper at. Phasellus a neque in metus elementum sagittis. Fusce ut mauris sed est mollis faucibus. Etiam elementum dictum eros, non venenatis ligula maximus a. Fusce sit amet metus dui. Aenean consequat mattis ornare. Morbi orci nibh, pellentesque ac mattis vestibulum, porttitor id quam. Etiam dapibus, neque ac maximus scelerisque, sem massa bibendum arcu, sit amet pharetra sapien nisi a leo. Ut tristique tortor sed mauris pharetra iaculis non vitae velit. Vivamus ut nibh egestas, ullamcorper nisl ut, viverra justo.</p>
+				    			</div>
+				    
+				    		</div>
+				    	</div>
+				    </section>
+{% endblock %}

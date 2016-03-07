@@ -22,6 +22,7 @@ return array(
         'environmentVariables' => array(
             'basePath'         => '/var/www/public/',
             'baseUrl'          => 'http://honeybeevalley.dev/',
+			'assetsBaseUrl'    => 'http://honeybeevalley.dev/assets/',
         )
     ),
 
@@ -35,6 +36,7 @@ return array(
         'environmentVariables' => array(
             'basePath'         => '/public_html',
             'baseUrl'          => 'http://honeybeevalley.eu/',
+			'assetsBaseUrl'    => 'http://honeybeevalley.eu/assets/',
         )
     ),
 
@@ -48,6 +50,7 @@ return array(
         'environmentVariables' => array(
             'basePath'         => '/staging/public_html',
             'baseUrl'          => 'http://staging.honeybeevalley.eu/',
+			'assetsBaseUrl'    => 'http://staging.honeybeevalley.eu/assets/',
         )
     )
 );

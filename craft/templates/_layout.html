@@ -15,9 +15,9 @@
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Bree+Serif' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="{{ craft.config.environmentVariables.assetsBaseUrl }}css/app.css">
     <!-- Enkel Voor plantit -->
-    <link rel="stylesheet" type="text/css" href="assets/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="{{ craft.config.environmentVariables.assetsBaseUrl }}slick/slick.css" />
     <!-- -->
 </head>
 
@@ -28,7 +28,7 @@
                 <button class="close-button" aria-label="Close menu" type="button" data-close="">
                     <span aria-hidden="true">×</span>
                 </button>
-                <img src="/assets/img/global/hb-nav-logo.png" class="hb-oc-nav-logo" alt="HoneyBee Valley Logo">
+                <img src="{{ craft.config.environmentVariables.assetsBaseUrl }}img/global/hb-nav-logo.png" class="hb-oc-nav-logo" alt="HoneyBee Valley Logo">
                 <ul class="vertical menu oc-main-menu">
                     <li><a href="/diensten">Diensten</a></li>
                     <li><a href="/knowit">Know It</a></li>
@@ -86,7 +86,7 @@
                     <div class="row">
                         <div class="medium-1 large-3 columns">
                             <a href="index.html">
-                                <img data-interchange="[/assets/img/global/hb-footer-logo.png, medium], [/assets/img/global/hb-nav-logo.png, large]" class="hb-nav-logo" alt="HoneyBee Valley Logo">
+                                <img data-interchange="[{{ craft.config.environmentVariables.assetsBaseUrl }}img/global/hb-footer-logo.png, medium], [{{ craft.config.environmentVariables.assetsBaseUrl }}img/global/hb-nav-logo.png, large]" class="hb-nav-logo" alt="HoneyBee Valley Logo">
                             </a>
                         </div>
                         <div class="medium-11 large-9 columns">
@@ -135,7 +135,7 @@
                 <section class="footer hide-for-print">
                     <div class="row">
                         <div class="small-4 medium-2 columns">
-                            <img src="/assets/img/global/hb-footer-logo.png" alt="HoneyBee Logo">
+                            <img src="{{ craft.config.environmentVariables.assetsBaseUrl }}img/global/hb-footer-logo.png" alt="HoneyBee Logo">
                         </div>
                         <div class="small-4 medium-3 columns">
                             <ul class="menu vertical simple">
@@ -170,9 +170,9 @@
             </div>
         </div>
     </div>
-    <script src="/assets/js/app.js"></script>
-    <script type="text/javascript" src="/assets/slick/slick.min.js"></script>
-    <script type="text/javascript" src="/assets/slick/plantit.js"></script>
+    <script src="{{ craft.config.environmentVariables.assetsBaseUrl }}js/app.js"></script>
+    <script type="text/javascript" src="assets/slick/slick.min.js"></script>
+    <script type="text/javascript" src="assets/slick/plantit.js"></script>
 </body>
 
 </html>

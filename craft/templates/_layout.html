@@ -1,4 +1,9 @@
-{# # Layout template # --------------- # # This template defines your site’s global layout. It can be # “extended” by other templates to fill in the gaps. # # See Twig’s Template Inheritance documentation for more details: # http://twig.sensiolabs.org/doc/templates.html#template-inheritance #}
+{#
+#Layout template 
+# --------------- #
+# This template defines your site’s global layout. It can be # “extended” by other templates to fill in the gaps.#
+# See Twig’s Template Inheritance documentation for more details: # http://twig.sensiolabs.org/doc/templates.html#template-inheritance 
+#}
 <!doctype html>
 <html class="no-js" lang="nl">
 
@@ -10,7 +15,7 @@
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Bree+Serif' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
     <!-- Enkel Voor plantit -->
     <link rel="stylesheet" type="text/css" href="assets/slick/slick.css" />
     <!-- -->
@@ -23,23 +28,23 @@
                 <button class="close-button" aria-label="Close menu" type="button" data-close="">
                     <span aria-hidden="true">×</span>
                 </button>
-                <img src="assets/img/global/hb-nav-logo.png" class="hb-oc-nav-logo" alt="HoneyBee Valley Logo">
+                <img src="/assets/img/global/hb-nav-logo.png" class="hb-oc-nav-logo" alt="HoneyBee Valley Logo">
                 <ul class="vertical menu oc-main-menu">
-                    <li><a href="#">Diensten</a></li>
-                    <li><a href="#">Know It</a></li>
-                    <li><a href="#">Do It</a></li>
-                    <li><a href="#">Plant It</a></li>
-                    <li><a href="#">Bee It</a></li>
-                    <li><a href="#">Manage It</a></li>
+                    <li><a href="/diensten">Diensten</a></li>
+                    <li><a href="/knowit">Know It</a></li>
+                    <li><a href="/doit">Do It</a></li>
+                    <li><a href="/plantit">Plant It</a></li>
+                    <li><a href="/beeit">Bee It</a></li>
+                    <li><a href="/manageit">Manage It</a></li>
                 </ul>
                 <ul class="vertical menu oc-sub-menu">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Over ons</a></li>
-                    <li><a href="#">Partners</a></li>
-                    <li><a href="#">Onderzoeksthema's</a></li>
-                    <li><a href="#">Output</a></li>
-                    <li><a href="#">Kalender</a></li>
-                    <li><a href="#">Staff</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/over">Over ons</a></li>
+                    <li><a href="#/partners">Partners</a></li>
+                    <li><a href="/projectportfolios">Projectportfolio's</a></li>
+                    <li><a href="/output">Output</a></li>
+                    <li><a href="/kalender">Kalender</a></li>
+                    <li><a href="/staff">Staff</a></li>
                 </ul>
                 <form class="oc-search">
                     <div class="input-group">
@@ -81,36 +86,33 @@
                     <div class="row">
                         <div class="medium-1 large-3 columns">
                             <a href="index.html">
-                                <img data-interchange="[assets/img/global/hb-footer-logo.png, medium], [assets/img/global/hb-nav-logo.png, large]" class="hb-nav-logo" alt="HoneyBee Valley Logo">
+                                <img data-interchange="[/assets/img/global/hb-footer-logo.png, medium], [/assets/img/global/hb-nav-logo.png, large]" class="hb-nav-logo" alt="HoneyBee Valley Logo">
                             </a>
-                            <!-- Backup code als Interchange niet zou werken met het Foundation Build commando -->
-                            <!-- <img src="assets/img/global/hb-footer-logo.png" class="hb-nav-logo show-for-medium-only"> -->
-                            <!-- <img src="assets/img/global/hb-nav-logo.png" class="hb-nav-logo hide-for-medium-only"> -->
                         </div>
                         <div class="medium-11 large-9 columns">
                             <!-- Actual nav items start here -->
                             <div class="row">
                                 <div class="small-12 columns">
                                     <ul class="menu float-right hb-sub-nav">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="over.html">Over ons</a></li>
-                                        <li><a href="partners.html">Partners</a></li>
-                                        <li><a href="projectportfolios.html">Projectportfolio's</a></li>
-                                        <li><a href="output.html">Output</a></li>
-                                        <li><a href="kalender.html">Kalender</a></li>
-                                        <li><a href="staff.html">Staff</a></li>
+                                        <li><a href="/">Home</a></li>
+                                        <li><a href="/over">Over ons</a></li>
+                                        <li><a href="/partners">Partners</a></li>
+                                        <li><a href="/projectportfolios">Projectportfolio's</a></li>
+                                        <li><a href="/output">Output</a></li>
+                                        <li><a href="/kalender">Kalender</a></li>
+                                        <li><a href="/staff">Staff</a></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="small-12 columns">
                                     <ul class="menu float-right hb-main-nav">
-                                        <li><a href="diensten.html">Diensten</a></li>
-                                        <li><a href="knowit.html">Know It</a></li>
-                                        <li><a href="doit.html">Do It</a></li>
-                                        <li><a href="plantit.html">Plant It</a></li>
-                                        <li><a href="beeit.html">Bee It</a></li>
-                                        <li><a href="manageit.html">Manage It</a></li>
+                                        <li><a href="/diensten">Diensten</a></li>
+                                        <li><a href="/knowit">Know It</a></li>
+                                        <li><a href="/doit">Do It</a></li>
+                                        <li><a href="/plantit">Plant It</a></li>
+                                        <li><a href="/beeit">Bee It</a></li>
+                                        <li><a href="/manageit">Manage It</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -133,7 +135,7 @@
                 <section class="footer hide-for-print">
                     <div class="row">
                         <div class="small-4 medium-2 columns">
-                            <img src="assets/img/global/hb-footer-logo.png" alt="HoneyBee Logo">
+                            <img src="/assets/img/global/hb-footer-logo.png" alt="HoneyBee Logo">
                         </div>
                         <div class="small-4 medium-3 columns">
                             <ul class="menu vertical simple">
@@ -168,9 +170,9 @@
             </div>
         </div>
     </div>
-    <script src="assets/js/app.js"></script>
-    <script type="text/javascript" src="assets/slick/slick.min.js"></script>
-    <script type="text/javascript" src="assets/slick/plantit.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script type="text/javascript" src="/assets/slick/slick.min.js"></script>
+    <script type="text/javascript" src="/assets/slick/plantit.js"></script>
 </body>
 
 </html>

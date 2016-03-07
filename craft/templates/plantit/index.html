@@ -30,7 +30,18 @@
 				    		</div>
 				    	</div>	
 				    </section>
-				    
+				    {% set naam = craft.request.getParam('naam') ? craft.request.getParam('naam') : '' %}
+					{% set latijns = craft.request.getParam('latijns') ? craft.request.getParam('latijns') : '' %}
+					{% set oorsprong = craft.request.getParam('oorsprong') ? craft.request.getParam('oorsprong') : '' %}
+					{% set cinheems = oorsprong=='inheems' ? 'checked' : '' %}
+					{% set cuitheems = oorsprong=='uitheems' ? 'checked' : '' %}
+					{% set groep = craft.request.getParam('groep') ? craft.request.getParam('groep') : '' %}
+					{% set bloemkleur = craft.request.getParam('bloemkleur') ? craft.request.getParam('bloemkleur') : '' %}
+					{% set bloeimaand = craft.request.getParam('bloeimaand') ? craft.request.getParam('bloeimaand') : '' %}
+					{% set grond = craft.request.getParam('grond') ? craft.request.getParam('grond') : '' %}
+					{% set ph = craft.request.getParam('ph') ? craft.request.getParam('ph') : '' %}
+					{% set licht = craft.request.getParam('licht') ? craft.request.getParam('licht') : '' %}
+					{% set vocht = craft.request.getParam('vocht') ? craft.request.getParam('vocht') : '' %}
 				    <section class="hb-main-content">
 				    	<div class="row">
 				    	
@@ -41,7 +52,7 @@
 				    				<form>
 				    					<div class="row">
 				    					    <div class="medium-12 columns">
-				    					        <input type="text" placeholder="Zoeken">
+				    					        <input type="search" onchange="this.form.submit()" name="naam" placeholder="Zoeken" value="{{ naam }}"<br>
 				    					    </div>
 				    				  	</div>
 				    				  	<a class="expanded secondary button" href="#">Zoeken</a>
@@ -54,50 +65,53 @@
 				    
 				    				  	<fieldset class="fieldset">
 				    						<legend>Oorsprong</legend>
-				    						<input id="checkbox12" type="radio" name="oorsprong"><label for="checkbox12">Inheems</label><br>
-				    						<input id="checkbox22" type="radio" name="oorsprong"><label for="checkbox22">Uitheems</label>
+				    						<input type="radio" onchange="this.form.submit()" id="checkbox12" type="radio" name="oorsprong" value="inheems" {{ cinheems }}><label for="checkbox12">Inheems</label><br>
+				    						<input type="radio" onchange="this.form.submit()" id="checkbox22" type="radio" name="oorsprong" value="uitheems" {{ cuitheems }}><label for="checkbox22">Uitheems</label>
 				    					</fieldset>
 				    
 				    					<label>Groep
-				    					  <select>
-				    					    <option value="Heesters">Heesters</option>
-				    					    <option value="Coniferen">Coniferen</option>
-				    					    <option value="Vaste Planten">Vaste Planten</option>
-				    					    <option value="Bomen">Bomen</option>
-				    					    <option value="Fruitbomen">Fruitbomen</option>
-				    					    <option value="Kruiden">Kruiden</option>
-				    					    <option value="Grassen">Grassen</option>
-				    					    <option value="Landbouwgewassen">Landbouwgewassen</option>
+				    					  <select name="groep" onchange="this.form.submit()" >
+											<option></option>
+				    					    <option value="Heesters" {{ groep=='Heesters' ? 'Selected' }} >Heesters</option>
+				    					    <option value="Coniferen" {{ groep=='Coniferen' ? 'Selected' }} >Coniferen</option>
+				    					    <option value="vastePlanten" {{ groep=='vastePlanten' ? 'Selected' }} >Vaste Planten</option>
+				    					    <option value="Bomen" {{ groep=='Bomen' ? 'Selected' }} >Bomen</option>
+				    					    <option value="Fruitbomen" {{ groep=='Fruitbomen' ? 'Selected' }} >Fruitbomen</option>
+				    					    <option value="Kruiden" {{ groep=='Kruiden' ? 'Selected' }} >Kruiden</option>
+				    					    <option value="Grassen" {{ groep=='Grassen' ? 'Selected' }} >Grassen</option>
+				    					    <option value="Landbouwgewassen" {{ groep=='Landbouwgewassen' ? 'Selected' }} >Landbouwgewassen</option>
 				    					  </select>
 				    					</label>
 				    
 				    					<label>Bloemkleur
-				    					  <select>
-				    					    <option value="Geel">Geel</option>
-				    					    <option value="Blauw">Blauw</option>
-				    					    <option value="Rood">Rood</option>
-				    					    <option value="Groen">Groen</option>
-				    					    <option value="Roze">Roze</option>
-				    					    <option value="Wit">Wit</option>
-				    					    <option value="Paars">Paars</option>
-				    					    <option value="Oranje">Oranje</option>
+				    					  <select name="bloemkleur" onchange="this.form.submit()">
+											<option></option>
+				    					    <option value="Rood" {{ bloemkleur=='Rood' ? 'Selected' }}>Rood</option>
+											<option value="Oranje" {{ bloemkleur=='Oranje' ? 'Selected' }}>Oranje</option>
+											<option value="Geel" {{ bloemkleur=='Geel' ? 'Selected' }}>Geel</option>
+				    					    <option value="Groen" {{ bloemkleur=='Groen' ? 'Selected' }}>Groen</option>
+				    					    <option value="Blauw" {{ bloemkleur=='Blauw' ? 'Selected' }}>Blauw</option>
+				    					    <option value="Paars" {{ bloemkleur=='Paars' ? 'Selected' }}>Paars</option>
+											<option value="Roze" {{ bloemkleur=='Roze' ? 'Selected' }}>Roze</option>
+				    					    <option value="Wit" {{ bloemkleur=='Wit' ? 'Selected' }}>Wit</option>
 				    					  </select>
 				    					</label>
 				    
 				    					<label>Bloeimaand
-				    					  <select>
-				    					    <option value="Januari">Januari</option>
-				    					    <option value="Februari">Februari</option>
-				    					    <option value="Maart">Maart</option>
-				    					    <option value="April">April</option>
-				    					    <option value="Mei">Mei</option>
-				    					    <option value="Juni">Juni</option>
-				    					    <option value="Juli">Juli</option>
-				    					    <option value="Augustus">Augustus</option>
-				    					    <option value="September">September</option>
-				    					    <option value="Oktober">Oktober</option>
-				    					    <option value="November">November</option>
-				    					    <option value="December">December</option>
+				    					  <select name="bloeimaand" onchange="this.form.submit()">
+											<option></option>
+				    					    <option value="1" {{ bloeimaand=='1' ? 'Selected' }}>Januari</option>
+				    					    <option value="2" {{ bloeimaand=='2' ? 'Selected' }}>Februari</option>
+				    					    <option value="3" {{ bloeimaand=='3' ? 'Selected' }}>Maart</option>
+				    					    <option value="4" {{ bloeimaand=='4' ? 'Selected' }}>April</option>
+				    					    <option value="5" {{ bloeimaand=='5' ? 'Selected' }}>Mei</option>
+				    					    <option value="6" {{ bloeimaand=='6' ? 'Selected' }}>Juni</option>
+				    					    <option value="7" {{ bloeimaand=='7' ? 'Selected' }}>Juli</option>
+				    					    <option value="8" {{ bloeimaand=='8' ? 'Selected' }}>Augustus</option>
+				    					    <option value="9" {{ bloeimaand=='9' ? 'Selected' }}>September</option>
+				    					    <option value="10" {{ bloeimaand=='10' ? 'Selected' }}>Oktober</option>
+				    					    <option value="11" {{ bloeimaand=='11' ? 'Selected' }}>November</option>
+				    					    <option value="12" {{ bloeimaand=='12' ? 'Selected' }}>December</option>
 				    					  </select>
 				    					</label>
 				    
@@ -118,37 +132,41 @@
 				    						<legend>Habitat</legend>
 				    						
 				    						<label>Licht
-				    						  <select>
-				    						    <option value="Zon">Zon</option>
-				    						    <option value="Half-Schaduw">Half-Schaduw</option>
-				    						    <option value="Schaduw">Schaduw</option>
+				    						  <select name="licht" onchange="this.form.submit()">
+												<option></option>
+				    						    <option value="zon" {{ licht=='zon' ? 'Selected' }}>Zon</option>
+				    						    <option value="halfschaduw" {{ licht=='halfschaduw' ? 'Selected' }}>Half-Schaduw</option>
+				    						    <option value="schaduw" {{ licht=='schaduw' ? 'Selected' }}>Schaduw</option>
 				    						  </select>
 				    						</label>
 				    
 				    						<label>Grondsoort
-				    						  <select>
-				    						    <option value="Zand">Zand</option>
-				    						    <option value="Leem">Leem</option>
-				    						    <option value="Klei">Klei</option>
-				    						    <option value="Veen">Veen</option>
+				    						  <select name="grond" onchange="this.form.submit()">
+												<option></option>
+				    						    <option value="zand" {{ grond=='zand' ? 'Selected' }}>Zand</option>
+				    						    <option value="leem" {{ grond=='leem' ? 'Selected' }}>Leem</option>
+				    						    <option value="klei" {{ grond=='klei' ? 'Selected' }}>Klei</option>
+				    						    <option value="veen" {{ grond=='veen' ? 'Selected' }}>Veen</option>
 				    						  </select>
 				    						</label>
 				    
 				    						<label>PH
-				    						  <select>
-				    						    <option value="Zand">Zuurminnend</option>
-				    						    <option value="Leem">Neutraal</option>
-				    						    <option value="Klei">Kalkminnend</option>
+				    						  <select name="ph" onchange="this.form.submit()">
+												<option></option>
+				    						    <option value="zuurminnend" {{ ph=='zuurminnend' ? 'Selected' }}>Zuurminnend</option>
+				    						    <option value="neutraal" {{ ph=='neutraal' ? 'Selected' }}>Neutraal</option>
+				    						    <option value="kalkminnend" {{ ph=='kalkminnend' ? 'Selected' }}>Kalkminnend</option>
 				    						  </select>
 				    						</label>
 				    
 				    						<label>Vochtigheid
-				    						  <select>
-				    						    <option value="Zand">Droog</option>
-				    						    <option value="Leem">Gemiddeld</option>
-				    						    <option value="Klei">Vochthoudend</option>
-				    						    <option value="Klei">sterk wisselende omstandigheden</option>
-				    						    <option value="Klei">regelmatig overstroomde bodems</option>
+				    						  <select name="vocht" onchange="this.form.submit()">
+												<option></option>
+				    						    <option value="droog" {{ vocht=='droog' ? 'Selected' }}>Droog</option>
+				    						    <option value="gemiddeld" {{ vocht=='gemiddeld' ? 'Selected' }}>Gemiddeld</option>
+				    						    <option value="vochthoudend" {{ vocht=='vochthoudend' ? 'Selected' }}>Vochthoudend</option>
+				    						    <option value="sterkWisselendeOmstandigheden" {{ vocht=='sterkWisselendeOmstandigheden' ? 'Selected' }}>sterk wisselende omstandigheden</option>
+				    						    <option value="regelmatigOverstroomdeBodems" {{ vocht=='regelmatigOverstroomdeBodems' ? 'Selected' }}>regelmatig overstroomde bodems</option>
 				    						  </select>
 				    						</label>
 				    
@@ -170,8 +188,60 @@
 				    		<div class="small-12 medium-8 large-9 columns">
 				    			<h3 class="article-title">Gebruik van de Plant It databank</h3>
 				    			<div class="article-body-text">
-				    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porta et nulla ut venenatis. Suspendisse malesuada vestibulum imperdiet. Nullam vitae tincidunt purus. Etiam eu suscipit arcu, sed tincidunt odio. Phasellus vulputate sem ex, non tincidunt risus ullamcorper at. Phasellus a neque in metus elementum sagittis. Fusce ut mauris sed est mollis faucibus. Etiam elementum dictum eros, non venenatis ligula maximus a. Fusce sit amet metus dui. Aenean consequat mattis ornare. Morbi orci nibh, pellentesque ac mattis vestibulum, porttitor id quam. Etiam dapibus, neque ac maximus scelerisque, sem massa bibendum arcu, sit amet pharetra sapien nisi a leo. Ut tristique tortor sed mauris pharetra iaculis non vitae velit. Vivamus ut nibh egestas, ullamcorper nisl ut, viverra justo.</p>
-				    			</div>
+				    			
+								
+								{% set results = craft.entries({
+									section: 'plantIt',
+									order: 'score',
+									
+									search: 'naam:*'~ naam ~'* OR title:*'~ naam ~'*',
+									inheems: [
+									  'and',
+									  '= *'~ oorsprong ~'*' 
+									],
+									groep: [
+									  'and',
+									  '= *'~ groep ~'*' 
+									],
+									bloemkleur: [
+									  'and',
+									  '= *'~ bloemkleur ~'*' 
+									],
+									bloeimaand: [
+									  'and',
+									  '= *'~ bloeimaand ~'*' 
+									],
+									habitatGrondsoort: [
+									  'and',
+									  '= *'~ grond ~'*' 
+									],
+									habitatLicht: [
+									  'and',
+									  '= *'~ licht ~'*' 
+									],
+									habitatPh: [
+									  'and',
+									  '= *'~ ph ~'*' 
+									],
+									habitatVochtigheid: [
+									  'and',
+									  '= *'~ vocht ~'*' 
+									]
+								}) %}
+
+								{% if results|length %}
+									<p>{{ results|length }} results:</p>
+
+									<ul>
+										{% for entry in results %}
+											<li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+										{% endfor %}
+									</ul>
+								{% else %}
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porta et nulla ut venenatis. Suspendisse malesuada vestibulum imperdiet. Nullam vitae tincidunt purus. Etiam eu suscipit arcu, sed tincidunt odio. Phasellus vulputate sem ex, non tincidunt risus ullamcorper at. Phasellus a neque in metus elementum sagittis. Fusce ut mauris sed est mollis faucibus. Etiam elementum dictum eros, non venenatis ligula maximus a. Fusce sit amet metus dui. Aenean consequat mattis ornare. Morbi orci nibh, pellentesque ac mattis vestibulum, porttitor id quam. Etiam dapibus, neque ac maximus scelerisque, sem massa bibendum arcu, sit amet pharetra sapien nisi a leo. Ut tristique tortor sed mauris pharetra iaculis non vitae velit. Vivamus ut nibh egestas, ullamcorper nisl ut, viverra justo.</p>
+								{% endif %}
+								
+								</div>
 				    
 				    		</div>
 				    	</div>

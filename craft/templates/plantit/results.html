@@ -236,8 +236,14 @@
 										{% for entry in results %}
 										<div class="column">
 											<a href="{{ entry.url }}">
-											<img src="{{ craft.config.environmentVariables.assetsBaseUrl }}img/plantit/{{ entry.fotos }}" class="thumbnail plantit-thumb" alt="{{ entry.title }}">
-											<p class="plantit-name">{{ entry.title }}</p>
+											{% set image = entry.fotos.first() %}
+											{# checken of dat er daadwerkelijk een beeld is. #}
+											{% if image %}
+												<img src="{{ image.getUrl('plantItThumb') }}" class="thumbnail plantit-thumb" alt="{{ entry.naam }}">
+											{% else %}
+												<img src="{{ craft.config.environmentVariables.assetsBaseUrl }}img/plantit/no-image-available.jpg" class="thumbnail plantit-thumb" alt="{{ entry.naam }}">
+											{% endif %}
+											<p class="plantit-name">{{ entry.naam }}</p>
 											</a>
 										</div>	
 										{% endfor %}

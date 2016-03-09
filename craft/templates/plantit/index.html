@@ -231,12 +231,18 @@
 
 								{% if results|length %}
 									<p>{{ results|length }} results:</p>
-
-									<ul>
+									<div class="row small-up-2 medium-up-3 large-up-4">
+									
 										{% for entry in results %}
-											<li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+										<div class="column">
+											<a href="{{ entry.url }}">
+											<img src="{{ craft.config.environmentVariables.assetsBaseUrl }}img/plantit/{{ entry.fotos }}" class="thumbnail plantit-thumb" alt="{{ entry.title }}">
+											<p class="plantit-name">{{ entry.title }}</p>
+											</a>
+										</div>	
 										{% endfor %}
-									</ul>
+									
+									<div class="row small-up-2 medium-up-3 large-up-4">
 								{% else %}
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porta et nulla ut venenatis. Suspendisse malesuada vestibulum imperdiet. Nullam vitae tincidunt purus. Etiam eu suscipit arcu, sed tincidunt odio. Phasellus vulputate sem ex, non tincidunt risus ullamcorper at. Phasellus a neque in metus elementum sagittis. Fusce ut mauris sed est mollis faucibus. Etiam elementum dictum eros, non venenatis ligula maximus a. Fusce sit amet metus dui. Aenean consequat mattis ornare. Morbi orci nibh, pellentesque ac mattis vestibulum, porttitor id quam. Etiam dapibus, neque ac maximus scelerisque, sem massa bibendum arcu, sit amet pharetra sapien nisi a leo. Ut tristique tortor sed mauris pharetra iaculis non vitae velit. Vivamus ut nibh egestas, ullamcorper nisl ut, viverra justo.</p>
 								{% endif %}

@@ -1,19 +1,8 @@
-{#
- # News entry template
- # -------------------
- #
- # This template gets loaded whenever a News entry’s URL is
- # requested. That’s because the News section’s Template setting is
- # set to “news/_entry”, the path to this template.
- #
- # When this template is loaded, it will already have an ‘entry’
- # variable, set to the requested News entry.
- #
- # See this page for more details on how Craft routes requests:
- # http://craftcms.com/docs/routing
- #}
-
 {% extends "_layout" %}
+{% block head %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ craft.config.environmentVariables.assetsBaseUrl }}slick/slick.css" />
+{% endblock %}
 
 {% block content %}
 <section class="hb-header hb-plantit hide-for-print">
@@ -187,21 +176,17 @@
 				    			<!-- Start 2 Kolommen -->
 				    			<div class="row">
 				    				<div class="small-12 medium-5 columns">
-				    
+				    				{% set image = entry.fotos %}
 				    				<div class="plantit-slider">
-				    				    <div><img class="article-image" src="http://placehold.it/500x500/d90000" alt=""></div>
-				    				    <div><img class="article-image" src="http://placehold.it/500x500/00d952" alt=""></div>
-				    				    <div><img class="article-image" src="http://placehold.it/500x500/FF99FF" alt=""></div>
-				    				    <div><img class="article-image" src="http://placehold.it/500x500/00d952" alt=""></div>
-				    				    <div><img class="article-image" src="http://placehold.it/500x500/FF99FF" alt=""></div>
+				    					{% for image in entry.fotos %}
+				    				    <div><img class="article-image" src="{{ image.getUrl }}" alt="{{entry.naam}}"></div>
+				    				    {% endfor %}
 				    				</div>
-				    
+				    				{% set image = entry.fotos %}
 				    				<div class="plantit-slider-nav slick-slider">
-				    				  	<div><img class="article-image" src="http://placehold.it/500x500/d90000" alt=""></div>
-				    				    <div><img class="article-image" src="http://placehold.it/500x500/00d952" alt=""></div>
-				    				    <div><img class="article-image" src="http://placehold.it/500x500/FF99FF" alt=""></div>
-				    				    <div><img class="article-image" src="http://placehold.it/500x500/00d952" alt=""></div>
-				    				    <div><img class="article-image" src="http://placehold.it/500x500/FF99FF" alt=""></div>
+				    					{% for image in entry.fotos %}
+				    				  	<div><img class="" src="{{ image.getUrl('plantItThumb') }}" alt="{{entry.naam}}"></div>
+				    				    {% endfor %}
 				    				</div>
 				    
 				    				</div>
@@ -332,4 +317,10 @@
 				    		</div>
 				    	</div>
 				    </section>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ craft.config.environmentVariables.assetsBaseUrl }}slick/slick.min.js"></script>
+    <script type="text/javascript" src="{{ craft.config.environmentVariables.assetsBaseUrl }}slick/plantit.js"></script>
 {% endblock %}

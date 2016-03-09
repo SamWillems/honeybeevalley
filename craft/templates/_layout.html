@@ -1,24 +1,17 @@
-{#
-#Layout template 
-# --------------- #
-# This template defines your site’s global layout. It can be # “extended” by other templates to fill in the gaps.#
-# See Twig’s Template Inheritance documentation for more details: # http://twig.sensiolabs.org/doc/templates.html#template-inheritance 
-#}
 <!doctype html>
 <html class="no-js" lang="nl">
 
 <head>
+    {% block head %}
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Honeybee Valley</title>
+    <title>{% if title is defined %}{{ title }} - {% endif %}{{ siteName }}</title>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Bree+Serif' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ craft.config.environmentVariables.assetsBaseUrl }}css/app.css">
-    <!-- Enkel Voor plantit -->
-    <link rel="stylesheet" type="text/css" href="{{ craft.config.environmentVariables.assetsBaseUrl }}slick/slick.css" />
-    <!-- -->
+    {% endblock %}
 </head>
 
 <body>
@@ -171,9 +164,18 @@
             </div>
         </div>
     </div>
-    <script src="{{ craft.config.environmentVariables.assetsBaseUrl }}js/app.js"></script>
-    <script type="text/javascript" src="assets/slick/slick.min.js"></script>
-    <script type="text/javascript" src="assets/slick/plantit.js"></script>
-</body>
+    {% block scripts %}
+        <script src="{{ craft.config.environmentVariables.assetsBaseUrl }}js/app.js"></script>
+        <script src="{{ craft.config.environmentVariables.assetsBaseUrl }}js/jquery.swipebox.min.js"></script>
+        <script type="text/javascript">
+            ;( function( $ ) {
 
+                $( '.swipebox' ).swipebox({
+                    hideBarsDelay : 0,
+                });
+
+            } )( jQuery );
+        </script>
+    {% endblock %}
+</body>
 </html>

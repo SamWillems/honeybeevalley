@@ -13,12 +13,14 @@
         </tbody>
     </table>
     {# Einde Tabel #}
+
     {# Begin Paragraaf #}
 	{% case 'blokParagraaf' %}
 	<div class="article-body-text">
 	{{ block.artikelParagraaf }}
 	</div>
 	{# Einde Paragraaf #}
+
 	{# Begin Lijsten #}
 	{% case 'blokLijst' %}
 	<div class="article-list">
@@ -29,6 +31,7 @@
 		</ul>
 	</div>
 	{# Einde lijsten#}
+
 	{# Begin Callout #}
 	{% case 'blokCallout' %}
 	<div class="callout large article-callout">
@@ -36,6 +39,7 @@
 	  {{ block.calloutBodyTekst }}
 	</div>
 	{# Einde Callout #}
+
 	{# Begin Quote #}
 	{% case 'blokQuote' %}
 	<blockquote class="article-quote">
@@ -43,42 +47,49 @@
 	  <cite>{{ block.auteur }}</cite>
 	</blockquote>
 	{# Einde Quote #}
+
 	{# Begin Afbeelding #}
 	{% case 'blokAfbeelding' %}
-		{% if block.artikelAfbeelding %}
 	    {% set asset = block.artikelAfbeelding.first() %}
-	    	<img class="article-image" src="{{ asset.url }}" alt="{{ asset.title }}">
-		{% endif %}
+    	{% if block.Positie == 'right' %}
+    		<img class="article-image-right" src="{{ asset.url }}" alt="{{ asset.title }}">
+    	{% else %}
+    		<img class="article-image-left" src="{{ asset.url }}" alt="{{ asset.title }}">
+    	{% endif %}
 	{# Einde Afbeelding #}
 
-	{# 
+	{# Begin Full width Afbeelding #}
+	{% case 'blokafbeeldingVolleBreedte' %}
 	<div class="article-full-image">
-		<img src="//placehold.it/870x400" alt="">
+		{% if block.artikelFwAfbeelding %}
+	    {% set asset = block.artikelFwAfbeelding.first() %}
+			<img src="{{ asset.url }}" alt="{{ asset.title }}">
+		{% endif %}
 	</div>
 
+	{# Begin Gallerij #}
+	{% case 'blokGallerij' %}
 	<div class="article-gallery">
 		<div class="row small-up-1 medium-up-2 large-up-4">
-			  <div class="column">
-			    <img src="//placehold.it/300x240" class="thumbnail" alt="">
-			  </div>
-			  <div class="column">
-			    <img src="//placehold.it/300x240" class="thumbnail" alt="">
-			  </div>
-			  <div class="column">
-			    <img src="//placehold.it/300x240" class="thumbnail" alt="">
-			  </div>
-			  <div class="column">
-			    <img src="//placehold.it/300x240" class="thumbnail" alt="">
-			  </div>
-			  <div class="column">
-			    <img src="//placehold.it/300x240" class="thumbnail" alt="">
-			  </div>
-			  <div class="column">
-			    <img src="//placehold.it/300x240" class="thumbnail" alt="">
-			  </div>
+			{% if block.artikelGallerij %}
+			{# We wijzen een id toe aan gallerij_id om een unieke identifier te hebben om verschillende gallerijen te onderscheiden #}
+			{% set gallerij_id = loop.index %}
+		    	{% for image in block.artikelGallerij %}
+				  <div class="column">
+				  	<a class="swipebox" href="{{ image.getUrl('artikelGallerij') }}" rel="{{ gallerij_id }}">
+				    	<img src="{{ image.getUrl('artikelGallerij') }}" class="thumbnail" alt="{{ image.title }}">
+				    </a>
+				  </div>
+				{% endfor %}  
+			{% endif %}
 		</div>
 	</div>
 
+	{# Begin Custom Title #}
+	{% case 'blokTitel' %}
+	<h4 class="article-h4-title">{{ block.artikelTitel }}</h4>
+
+	{# 
 	<table class="hover stack article-info-table">
 		<tbody>
           <tr>

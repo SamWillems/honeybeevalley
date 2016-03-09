@@ -155,12 +155,11 @@
 				    		</div>
 				    
 				    		<div class="small-12 medium-8 large-9 columns">
-
-				    			<h3 class="article-title">PlantIt Database</h3>
-								<div class="article-body-text">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porta et nulla ut venenatis. Suspendisse malesuada vestibulum imperdiet. Nullam vitae tincidunt purus. Etiam eu suscipit arcu, sed tincidunt odio. Phasellus vulputate sem ex, non tincidunt risus ullamcorper at. Phasellus a neque in metus elementum sagittis. Fusce ut mauris sed est mollis faucibus. Etiam elementum dictum eros, non venenatis ligula maximus a. Fusce sit amet metus dui. Aenean consequat mattis ornare. Morbi orci nibh, pellentesque ac mattis vestibulum, porttitor id quam. Etiam dapibus, neque ac maximus scelerisque, sem massa bibendum arcu, sit amet pharetra sapien nisi a leo. Ut tristique tortor sed mauris pharetra iaculis non vitae velit. Vivamus ut nibh egestas, ullamcorper nisl ut, viverra justo.</p>
-								</div>
-				    
+				    			{% set entries = craft.entries.section('plantItIntropagina').limit('1') %}
+				    			{% for entry in entries %}
+				    			<h3 class="article-title">{{ entry.title }}</h3>
+									{% include "_includes/artikel" %}
+								{% endfor %}
 				    		</div>
 				    	</div>
 				    </section>

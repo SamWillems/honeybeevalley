@@ -69,10 +69,11 @@
                             <ul class="dropdown menu login-menu align-right" data-dropdown-menu>
                                 <li>
                                     <a href="#"><i class="fa fa-globe"></i> <span><i class="fa fa-caret-down"></i></span></a>
+                                    {% set element = (entry is defined ? entry : null) %}
                                     <ul class="menu">
-                                        <li><a href="#">Nederlands</a></li>
-                                        <li><a href="#">Frans</a></li>
-                                        <li><a href="#">Engels</a></li>
+                                        <li><a href="{{ ll('nl_be', element) }}">Nederlands</a></li>
+                                        <li><a href="{{ ll('fr_be', element) }}">Frans</a></li>
+                                        <li><a href="{{ ll('en', element) }}">Engels</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -85,7 +86,7 @@
                 <section class="navigation show-for-medium hide-for-print">
                     <div class="row">
                         <div class="medium-1 large-3 columns">
-                            <a href="index.html">
+                            <a href="/">
                                 <img data-interchange="[{{ craft.config.environmentVariables.assetsBaseUrl }}img/global/hb-footer-logo.png, medium], [{{ craft.config.environmentVariables.assetsBaseUrl }}img/global/hb-nav-logo.png, large]" class="hb-nav-logo" alt="HoneyBee Valley Logo">
                             </a>
                         </div>

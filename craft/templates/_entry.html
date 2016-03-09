@@ -35,38 +35,29 @@
 <section class="hb-main-content">
 	<div class="row">
 		<div class="small-12 medium-7 large-8 columns">
-
-		<!-- start blog items -->
-		{% paginate craft.entries.section('homepage').limit(5) as pageEntries %}
-			{% for entry in pageEntries %}
-				<div class="news-item">
-					<div class="row">
-						<div class="small-12 columns">
-						    <h2>{{ entry.title }}</h2>
-						    <p class="post-date"><i class="fa fa-clock-o"></i> {{ entry.postDate }}</p>
-						</div>
+			<div class="news-item">
+				<div class="row">
+					<div class="small-12 columns">
+						<h2>{{ entry.title }}</h2>
+						<p class="post-date"><i class="fa fa-clock-o"></i> {{ entry.postDate }}</p>
 					</div>
+				</div>
+			  
+		    	{% for block in entry.homepageNieuws %}
+		    		{% switch block.type %}
+		    		{% case 'blokIntro' %}
+		    			{% for image in block.introAfbeelding %}
+		    				<img class="news-item-image" src="{{ image.getUrl }}" alt="{{ image.title }}">
+		    			{% endfor %}
+		    			{{ block.introTekst }}
+		    		{% endswitch %}	
+				{% endfor %}
 
-					<div class="row">	
-						<div class="small-12 columns">    
-					    	{% for block in entry.homepageNieuws %}
-					    		{% switch block.type %}
-					    		{% case 'blokIntro' %}
-					    			{% for image in block.introAfbeelding %}
-					    				<img class="news-item-image" src="{{ image.getUrl }}" alt="{{ image.title }}">
-					    			{% endfor %}
-					    			{{ block.introTekst }}
-					    		{% endswitch %}	
-							{% endfor %}
-							 <a href="{{ entry.url }}" class="button">Meer lezen...</a>
-					    </div>
-					    
-				    </div>
-			    </div>
-		    {% endfor %}
-		<!-- end blog items -->
-		        
+				{% include "_includes/artikel" %}
+
+			</div>					     
 		</div>
+
 		<div class="medium-5 large-3 large-offset-1 hide-for-small-only columns">
 		<!-- Start sidebar -->
 		<div class="hb-sidebar callout">

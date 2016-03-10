@@ -84,10 +84,25 @@
 			{% endif %}
 		</div>
 	</div>
+	{# Einde Gallerij #}
 
 	{# Begin Custom Title #}
 	{% case 'blokTitel' %}
 	<h4 class="article-h4-title">{{ block.artikelTitel }}</h4>
+	{# Einde Custom Title #}
+
+	{% case 'blokIntro' %}
+	<div class="callout large article-info-container">
+		<div class="row">
+			<div class="small-12 medium-12 large-5 columns">
+				{% set asset = block.artikelIntroductieAfbeelding.first() %}
+				<img src="{{ asset.url }}" alt="{{ asset.title }}">
+			</div>
+			<div class="small-12 medium-12 large-7 columns">
+				{{ block.artikelIntroductieTekst }}
+			</div>
+		</div>
+	</div>
 
 	{# 
 	<table class="hover stack article-info-table">

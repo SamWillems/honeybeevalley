@@ -34,7 +34,7 @@ return array(
             'en'    => 'http://honeybeevalley.eu/en/',
         ),
         'environmentVariables' => array(
-            'basePath'         => '/public_html',
+            'basePath'         => '/public_html/',
             'baseUrl'          => 'http://honeybeevalley.eu/',
 			'assetsBaseUrl'    => 'http://honeybeevalley.eu/assets/',
         )
@@ -48,7 +48,7 @@ return array(
             'en'    => 'http://staging.honeybeevalley.eu/en/',
         ),
         'environmentVariables' => array(
-            'basePath'         => '/staging/public_html',
+            'basePath'         => '/home/honeybe6/staging/public_html/',
             'baseUrl'          => 'http://staging.honeybeevalley.eu/',
 			'assetsBaseUrl'    => 'http://staging.honeybeevalley.eu/assets/',
         )

@@ -1,11 +1,12 @@
 <!doctype html>
-<html class="no-js" lang="nl">
+<html class="no-js" lang="{{ craft.locale }}">
 
 <head>
     {% block head %}
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% hook 'seomaticRender' %}
     <title>{% if title is defined %}{{ title }} - {% endif %}{{ siteName }}</title>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Bree+Serif' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
@@ -133,31 +134,31 @@
                         </div>
                         <div class="small-4 medium-3 columns">
                             <ul class="menu vertical simple">
-                                <li><a href="over.html">Over ons</a></li>
-                                <li><a href="partners.html">Partners</a></li>
-                                <li><a href="onderzoeksthemas.html">Onderzoeksthema's</a></li>
+                                <li><a href="/over">Over ons</a></li>
+                                <li><a href="/partners">Partners</a></li>
+                                <li><a href="/projectportfolios">Projectportfolios's</a></li>
                             </ul>
                             <ul class="menu vertical simple">
-                                <li><a href="output.html">Output</a></li>
-                                <li><a href="kalender.html">Kalender</a></li>
-                                <li><a href="staff.html">Staff</a></li>
+                                <li><a href="/output">Output</a></li>
+                                <li><a href="/kalender">Kalender</a></li>
+                                <li><a href="/staff">Staff</a></li>
                             </ul>
                         </div>
                         <div class="small-4 medium-3 columns">
                             <ul class="menu vertical footer-main-nav">
-                                <li><a href="diensten.html">Diensten</a></li>
-                                <li><a href="knowit.html">Know It</a></li>
-                                <li><a href="doit.html">Do It</a></li>
+                                <li><a href="/diensten">Diensten</a></li>
+                                <li><a href="/knowit">Know It</a></li>
+                                <li><a href="/doit">Do It</a></li>
                             </ul>
                             <ul class="menu vertical footer-main-nav">
-                                <li><a href="plantit.html">Plant It</a></li>
-                                <li><a href="beeit.html">Bee It</a></li>
-                                <li><a href="manageit.html">Manage It</a></li>
+                                <li><a href="/plantit">Plant It</a></li>
+                                <li><a href="/beeit">Bee It</a></li>
+                                <li><a href="/manageit">Manage It</a></li>
                             </ul>
                         </div>
                         <div class="small-12 medium-4 columns">
-                            <p>Honeybee Valley bundelt het wetenschappelijke bijenonderzoek aan de UGent en werkt samen met de landbouw en andere partners</p>
-                            <p>&copy; HoneyBee Valley</p>
+                            <p>{{ headers.homepageHeaderSubtitel }}</p>
+                            <p>&copy; {{ siteName }}</p>
                         </div>
                     </div>
                 </section>

@@ -32,16 +32,27 @@
 				    </section>
 				    {% set naam = craft.request.getParam('naam') ? craft.request.getParam('naam') : '' %}
 					{% set latijns = craft.request.getParam('latijns') ? craft.request.getParam('latijns') : '' %}
-					{% set oorsprong = craft.request.getParam('oorsprong') ? craft.request.getParam('oorsprong') : '' %}
-					{% set cinheems = oorsprong=='inheems' ? 'checked' : '' %}
-					{% set cuitheems = oorsprong=='uitheems' ? 'checked' : '' %}
+					{% set oorsprong1 = craft.request.getParam('oorsprong1') ? craft.request.getParam('oorsprong1') : '' %}
+					{% set oorsprong2 = craft.request.getParam('oorsprong2') ? craft.request.getParam('oorsprong2') : '' %}
 					{% set groep = craft.request.getParam('groep') ? craft.request.getParam('groep') : '' %}
 					{% set bloemkleur = craft.request.getParam('bloemkleur') ? craft.request.getParam('bloemkleur') : '' %}
 					{% set bloeimaand = craft.request.getParam('bloeimaand') ? craft.request.getParam('bloeimaand') : '' %}
+					{% set hoogte = craft.request.getParam('hoogte') ? craft.request.getParam('hoogte') : '' %}
 					{% set grond = craft.request.getParam('grond') ? craft.request.getParam('grond') : '' %}
 					{% set ph = craft.request.getParam('ph') ? craft.request.getParam('ph') : '' %}
 					{% set licht = craft.request.getParam('licht') ? craft.request.getParam('licht') : '' %}
 					{% set vocht = craft.request.getParam('vocht') ? craft.request.getParam('vocht') : '' %}
+					{% set bijen1 = craft.request.getParam('bijen1') ? craft.request.getParam('bijen1') : '' %}
+					{% set bijtemp = bijen1 ? bijen1 : '' %}
+					{% set bijen = bijen1 ?  'nectarEnPollenleverancier' : '' %}
+					{% set bijen2 = craft.request.getParam('bijen2') ? craft.request.getParam('bijen2') : '' %}
+					{% if bijtemp %}
+						{% set bijtemp = bijen2 ?  'nectarEnPollenleverancier' : bijtemp %}
+					{% else %}
+						{% set bijen = bijen2 ? 'nectarEnPollenleverancier' : '' %}
+						{% set bijtemp = bijen2 ? bijen2 : '' %}
+					{% endif %}
+				
 				    <section class="hb-main-content">
 				    	<div class="row">
 				    	
@@ -55,18 +66,17 @@
 				    					        <input type="search" onchange="this.form.submit()" name="naam" placeholder="Zoeken" value="{{ naam }}"<br>
 				    					    </div>
 				    				  	</div>
-				    				  	<a class="expanded secondary button" href="#">Zoeken</a>
-				    				</form>
+				    				  	<input type="submit" class="expanded secondary button" onclick="this.form.submit()" value="Zoeken">
+				    				
 				    				<br>
 				    				<!-- Zoeken op criteria form -->
 				    				<h4>Zoeken op criteria</h4>
 				    
-				    				<form> 	
-				    
+				    				
 				    				  	<fieldset class="fieldset">
 				    						<legend>Oorsprong</legend>
-				    						<input type="radio" onchange="this.form.submit()" id="checkbox12" type="radio" name="oorsprong" value="inheems" {{ cinheems }}><label for="checkbox12">Inheems</label><br>
-				    						<input type="radio" onchange="this.form.submit()" id="checkbox22" type="radio" name="oorsprong" value="uitheems" {{ cuitheems }}><label for="checkbox22">Uitheems</label>
+				    						<input onchange="this.form.submit()" id="checkbox12" type="checkbox" name="oorsprong1" value="inheems" {{ oorsprong1=='inheems' ? 'checked' }}><label for="checkbox12">Inheems</label><br>
+				    						<input onchange="this.form.submit()" id="checkbox22" type="checkbox" name="oorsprong2" value="uitheems" {{ oorsprong2=='uitheems' ? 'checked' }}><label for="checkbox22">Uitheems</label>
 				    					</fieldset>
 				    
 				    					<label>Groep
@@ -115,18 +125,17 @@
 				    					  </select>
 				    					</label>
 				    
-				    					<fieldset class="fieldset">
-				    						<legend>Hoogte (in cm)</legend>
-				    						<div class="small-12 columns">
-				    						  <div class="slider" data-slider data-start="0" data-end="200" data-initial-start="100" data-step="20" data-decimal="0">
-				    						    <span class="slider-handle"  data-slider-handle role="slider" tabindex="1" aria-controls="sliderOutput"></span>
-				    						    <span class="slider-fill" data-slider-fill></span>
-				    						  </div>
-				    						</div>
-				    						<div class="small-12 columns">	
-				    						  <input type="number" id="sliderOutput">
-				    						</div>
-				    					</fieldset>
+				    					
+				    					<label>Hoogte
+				    					  <select name="hoogte" onchange="this.form.submit()">
+											<option></option>
+				    					    <option value="0-20cm" {{ hoogte=='0-20cm' ? 'Selected' }}>0-20cm</option>
+				    					    <option value="21-50cm" {{ hoogte=='21-50cm' ? 'Selected' }}>21-50cm</option>
+				    					    <option value="51-100cm" {{ hoogte=='51-100cm' ? 'Selected' }}>51-100cm</option>
+											<option value="101-200cm" {{ hoogte=='101-200cm' ? 'Selected' }}>101-200cm</option>
+				    					    <option value=">200cm" {{ hoogte=='>200cm' ? 'Selected' }}>>200cm</option>
+				    					  </select>
+				    					</label>
 				    
 				    					<fieldset class="fieldset">
 				    						<legend>Habitat</legend>
@@ -174,12 +183,11 @@
 				    
 				    					<fieldset class="fieldset">
 				    					  <legend>Bijenvriendelijkheid</legend>
-				    					  <input id="Nectarleverancier" type="checkbox"><label for="Nectarleverancier">Nectarleverancier</label><br>
-				    					  <input id="Pollenleverancier" type="checkbox"><label for="Pollenleverancier">Pollenleverancier</label><br>
-				    					  <input id="npleverancier" type="checkbox"><label for="npleverancier" class="pollen">Nectar- en pollenleverancier</label><br>
+				    					  <input id="Nectarleverancier" type="checkbox" name="bijen1" onchange="this.form.submit()" value="nectarleverancier" {{ bijen1=='nectarleverancier' ? 'checked' }} ><label for="Nectarleverancier">Nectarleverancier</label><br>
+				    					  <input id="Pollenleverancier" type="checkbox" name="bijen2" onchange="this.form.submit()" value="pollenleverancier" {{ bijen2=='pollenleverancier' ? 'checked' }}><label for="Pollenleverancier">Pollenleverancier</label><br>
 				    					</fieldset>
 				    
-				    					<a class="expanded secondary button" href="#">Zoeken</a>
+				    					<input type="submit" class="expanded secondary button" onclick="this.form.submit()" value="Zoeken">
 				    
 				    				</form> 
 				    			</div>
@@ -188,20 +196,19 @@
 				    		<div class="small-12 medium-8 large-9 columns">
 				    			<h3 class="article-title">Zoekresultaten</h3>
 				    			<div class="article-body-text">
-				    			
-								
+								{{ bijen }} {{ bijtemp}}
 								{% set results = craft.entries({
 									section: 'plantIt',
 									order: 'score',
 									
-									search: 'naam:*'~ naam ~'* OR title:*'~ naam ~'*',
+									search: 'naam:*'~ naam ~'* OR title:*'~ naam ~'* bijenvriendelijkheid:*'~ bijtemp ~'* OR bijenvriendelijkheid:*'~ bijen ~'* inheems:*'~ oorsprong2 ~'*',
 									inheems: [
 									  'and',
-									  '= *'~ oorsprong ~'*' 
+									  '= *'~ oorsprong1 ~'*'
 									],
 									groep: [
 									  'and',
-									  '= *'~ groep ~'*' 
+									  '= *'~ groep ~'*'		
 									],
 									bloemkleur: [
 									  'and',
@@ -210,6 +217,10 @@
 									bloeimaand: [
 									  'and',
 									  '= *'~ bloeimaand ~'*' 
+									],
+									hoogte: [
+									  'and',
+									  '= *'~ hoogte ~'*' 
 									],
 									habitatGrondsoort: [
 									  'and',

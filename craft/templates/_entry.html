@@ -1,24 +1,4 @@
-{#
- # Homepage template
- # ---------------
- #
- # When this template gets loaded, it will be because someone has accessed
- # http://yoursite.com/ (without any URI). Craft checks to see if you have
- # a Single section set to be the Homepage (as you do, by default), and
- # loads the section’s Template (this file). A special ‘entry’ variable
- # will already be set for you, assigned to the Homepage entry.
- #
- # It's worth noting that even if you didn't have a Homepage Single section,
- # as long as this template remains at craft/templates/index.html, it
- # would still be the one to get loaded when accessing http://yoursite.com/,
- # albeit without an ‘entry’ variable already set for you.
- #
- # See this page for more details on how Craft routes requests:
- # http://craftcms.com/docs/routing
- #}
-
 {% extends "_layout" %}
-
 {% block content %}
 
 <section class="hb-header hb-homepage hide-for-print">
@@ -60,48 +40,7 @@
 
 		<div class="medium-5 large-3 large-offset-1 hide-for-small-only columns">
 		<!-- Start sidebar -->
-		<div class="hb-sidebar callout">
-			<h3><i class="fa fa-search"></i> Zoeken</h3>
-			<h4>Doorzoek onze website</h4>
-			<!-- Start Search -->
-			<form>
-				<div class="row">
-				    <div class="medium-12 columns">
-				        <input type="text" placeholder="...">
-				        <a class="expanded secondary button" href="#">Zoeken</a>
-				    </div>
-			  	</div>
-			</form>  	
-			<!-- End Search -->
-			<hr>
-			<!-- Start Calendar -->
-			<div class="row">
-				<div class="medium-12 columns">
-					<h3><i class="fa fa-calendar-o"></i> Kalender</h3>
-					<h4>Naderende evenementen</h4>
-					<span class="hb-cal-title"><i class="fa fa-caret-right"></i> 23 Februari 2016</span>
-					<p class="hb-cal-short-desc">Lorem ipsum dolor sit amet.</p>
-					<span class="hb-cal-title"><i class="fa fa-caret-right"></i> 28 Februari 2016</span>
-					<p class="hb-cal-short-desc">Lorem ipsum dolor.</p>
-					<span class="hb-cal-title"><i class="fa fa-caret-right"></i> 16 Maart 2016</span>
-					<p class="hb-cal-short-desc">Lorem ipsum dolor sit amet. Condimentum mattis lacus semper.</p>
-				</div>
-			</div>
-			<!-- End Calendar -->
-			<hr>
-			<!-- Start Newsletter Form -->
-			<h3><i class="fa fa-envelope-o"></i> Nieuwsbrief</h3>
-			<h4>Schrijf je in op onze nieuwsbrief</h4>
-			<form>
-				<div class="row">
-				    <div class="medium-12 columns">
-				        <input type="text" placeholder="Uw e-mail adres">
-				        <a class="expanded secondary button" href="#">Inschrijven</a>
-				    </div>
-			  	</div>
-			</form>  
-			<!-- End Newsletter Form -->
-		</div>
+		{% include "_includes/sidebar" %}
 		<!-- End sidebar -->
 		</div>
 	</div>

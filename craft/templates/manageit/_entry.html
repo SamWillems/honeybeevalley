@@ -18,7 +18,7 @@
 				    		<div class="small-12 columns hide-for-print">
 				    			<nav aria-label="You are here:" role="navigation">
 				    		        <ul class="breadcrumbs">
-				    		        <li><a href="/over">{{ entry.section.name }}</a></li>
+				    		        <li><a href="/manageit">{{ entry.section.name }}</a></li>
 				    		        {% if entry.level > 1 %}
 								        {% for crumb in entry.getAncestors() %}
 								            <li>{{ crumb.getLink() }}</li>
@@ -34,7 +34,7 @@
 				    		<div class="small-12 medium-4 large-3 columns hide-for-print">
 				    			<div class="side-nav-wrapper callout">
 				    			<h4>Navigatie</h4>
-				    				{% set entries = craft.entries.section('overOns') %}
+				    				{% set entries = craft.entries.section('manageIt') %}
 				    				<ul class="vertical menu" data-accordion-menu>
 				    					{% nav entry in entries %}
 						    				  <li>

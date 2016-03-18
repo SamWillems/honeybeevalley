@@ -18,7 +18,7 @@
 		<div class="small-12 medium-4 large-3 columns hide-for-print">
 			<div class="side-nav-wrapper callout">
 			<h4>Navigatie</h4>
-				{% set entries = craft.entries.section('overOns') %}
+				{% set entries = craft.entries.section('beeIt') %}
 				<ul class="vertical menu" data-accordion-menu>
 					{% nav entry in entries %}
 	    				  <li>
@@ -36,7 +36,7 @@
 		<div class="small-12 medium-8 large-9 columns">
 			<div class="row">
 				<div class="small-12 columns">
-					{% set entries = craft.entries.section('overOnsIntro') %}
+					{% set entries = craft.entries.section('beeItIntro') %}
 						{% for entry in entries %}
 							<h3 class="article-title">{{ entry.title }}</h3>
 							{% include "_includes/artikel" %}

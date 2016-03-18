@@ -254,14 +254,15 @@
 											{% else %}
 												<img src="{{ craft.config.environmentVariables.assetsBaseUrl }}img/plantit/no-image-available.jpg" class="thumbnail plantit-thumb" alt="{{ entry.naam }}">
 											{% endif %}
-											<p class="plantit-name">{{ entry.naam }}</p>
+											<p class="plantit-name">{{ entry.naam }}<br>{{ entry.title }}</p>
+
 											</a>
 										</div>	
 										{% endfor %}
 									
 									
 									{% else %}
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porta et nulla ut venenatis. Suspendisse malesuada vestibulum imperdiet. Nullam vitae tincidunt purus. Etiam eu suscipit arcu, sed tincidunt odio. Phasellus vulputate sem ex, non tincidunt risus ullamcorper at. Phasellus a neque in metus elementum sagittis. Fusce ut mauris sed est mollis faucibus. Etiam elementum dictum eros, non venenatis ligula maximus a. Fusce sit amet metus dui. Aenean consequat mattis ornare. Morbi orci nibh, pellentesque ac mattis vestibulum, porttitor id quam. Etiam dapibus, neque ac maximus scelerisque, sem massa bibendum arcu, sit amet pharetra sapien nisi a leo. Ut tristique tortor sed mauris pharetra iaculis non vitae velit. Vivamus ut nibh egestas, ullamcorper nisl ut, viverra justo.</p>
+										<p>Geen resultaten gevonden</p>
 									{% endif %}
 				    
 								</div>

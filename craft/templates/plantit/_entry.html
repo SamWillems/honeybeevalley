@@ -163,13 +163,13 @@
 				    				{% set image = entry.fotos %}
 				    				<div class="plantit-slider">
 				    					{% for image in entry.fotos %}
-				    				    <div><img class="article-image" src="{{ image.getUrl }}" alt="{{entry.naam}}"></div>
+				    				    <div><img class="article-image" src="{{ image.getUrl('plantIt') }}" alt="{{entry.naam}}"></div>
 				    				    {% endfor %}
 				    				</div>
 				    				{% set image = entry.fotos %}
 				    				<div class="plantit-slider-nav slick-slider">
 				    					{% for image in entry.fotos %}
-				    				  	<div><img class="" src="{{ image.getUrl('plantItThumb') }}" alt="{{entry.naam}}"></div>
+				    				  	<div><img class="thumbnail" src="{{ image.getUrl('plantItThumb') }}" alt="{{entry.naam}}"></div>
 				    				    {% endfor %}
 				    				</div>
 				    

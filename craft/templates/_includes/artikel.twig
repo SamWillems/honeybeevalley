@@ -52,9 +52,9 @@
 	{% case 'blokAfbeelding' %}
 	    {% set asset = block.artikelAfbeelding.first() %}
     	{% if block.Positie == 'right' %}
-    		<img class="article-image-right" src="{{ asset.url }}" alt="{{ asset.title }}">
+    		<img class="article-image-right" src="{{ asset.getUrl('artikelAfbeelding') }}" alt="{{ asset.title }}">
     	{% else %}
-    		<img class="article-image-left" src="{{ asset.url }}" alt="{{ asset.title }}">
+    		<img class="article-image-left" src="{{ asset.getUrl('artikelAfbeelding') }}" alt="{{ asset.title }}">
     	{% endif %}
 	{# Einde Afbeelding #}
 

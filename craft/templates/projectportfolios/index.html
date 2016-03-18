@@ -20,89 +20,71 @@
 {% extends "_layout" %}
 
 {% block content %}
-	<section class="hb-header hb-onderzoeksthemas hide-for-print">
-				    	<div class="row">
-				    		<div class="small-12 columns">
-				    			<div class="hb-header-inner">
-				    				<h1>Onderzoeksthema's</h1>
-				    				<p class="hb-header-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie convallis vestibulum. Etiam iaculis euismod orci, id ultricies augue malesuada nec. Maecenas ut nulla at risus aliquam efficitur.</p>
-				    			</div>
-				    		</div>
-				    	</div>
-				    </section>
-				    
-				    <section class="hb-main-content">
-				    
-				    	<div class="row">
-				    		<div class="small-12 columns hide-for-print">
-				    			<nav aria-label="You are here:" role="navigation">
-				    		        <ul class="breadcrumbs">
-				    		          <li><a href="#">Onderzoeksthema's</a></li>
-				    		        </ul>
-				    		    </nav>
-				    		</div>
-				    	</div>
-				    
-				    	<div class="row">
-				    		<div class="small-12 medium-4 large-3 columns hide-for-print">
-				    			<div class="side-nav-wrapper callout">
-				    			<h4>Navigatie</h4>
-				    				{% set entries = craft.entries.section('Projectportfolios').offset('1') %}
-				    				<ul class="vertical menu" data-accordion-menu>
-				    					{% nav entry in entries %}
-						    				  <li>
-						    				    <a href="{{ entry.url }}">{{ entry.title }}</a>
-						    				    {% ifchildren %}
-						    				    <ul class="menu vertical nested">
-						    				      {% children %}
-						    				    </ul>
-						    				    {% endifchildren %}
-						    				  </li>
-				    				  {% endnav %}
-				    				</ul>
+<section class="hb-header hb-onderzoeksthemas hide-for-print">
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="hb-header-inner">
+				<h1>Onderzoeksthema's</h1>
+				<p class="hb-header-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie convallis vestibulum. Etiam iaculis euismod orci, id ultricies augue malesuada nec. Maecenas ut nulla at risus aliquam efficitur.</p>
+			</div>
+		</div>
+	</div>
+</section>
 
-				    			</div>
-				    		</div>
-				    		<div class="small-12 medium-8 large-9 columns">
-				    
-				    			<div class="row">
-				    				<div class="small-12 columns">
-				    					{% set entries = craft.entries.section('Projectportfolios').limit('1') %}
-					    					{% for entry in entries %}
-					    						<h3 class="article-title">{{ entry.title }}</h3>
-					    					
-				    					<div class="callout large article-info-container clearfix">
-				    					<img class="article-image" src="//placehold.it/320x240" alt="">
-				    					<p>{{ entry.introductieTekst }}</p>
-				    					</div>
-				    					{% endfor %}
-				    				</div>
-				    			</div>
-				    
-				    				<!-- Start Klikbare Thumbnails -->
-				    					<div class="row small-up-1 medium-up-2 large-up-3">
-				    					{% set entries = craft.entries.section('Projectportfolios').level('1').offset('1') %}
-				    						
-				    						<!-- Start Herhaalbaar item -->
-				    						{% nav entry in entries %}
-				    						<div class="column">
-				    							<a href="{{ entry.url }}">
-				    							{% set image = entry.featureImage.first() %}
-				    							<div class="section-item-wrapper" style="background-image: url({{ image.url() }});">
-				    								<div class="section-item-title-wrapper">
-				    									<h4><i class="fa fa-caret-right"></i> {{ entry.title }}</h4>
-				    								</div>
-				    							</div>
+<section class="hb-main-content">
 
-				    							</a>
-				    						</div>
-				    						{% endnav %}
-				    						
-				    					</div>
-				    				<!-- Einde Klikbare Thumbnails -->
-				    
-				    		</div>
-				    	</div>
-				    
-				    </section>
+	<div class="row">
+		<div class="small-12 medium-4 large-3 columns hide-for-print">
+			<div class="side-nav-wrapper callout">
+			<h4>Navigatie</h4>
+				{% set entries = craft.entries.section('Projectportfolios').level(1) %}
+				<ul class="vertical menu" data-accordion-menu>
+					{% nav entry in entries %}
+	    				  <li>
+	    				    <a href="{{ entry.url }}">{{ entry.title }}</a>
+	    				  </li>
+				  {% endnav %}
+				</ul>
+
+			</div>
+		</div>
+		<div class="small-12 medium-8 large-9 columns">
+
+			<div class="row">
+				<div class="small-12 columns">
+					<h3 class="article-title">{{ entry.title }}</h3>
+					{% include "_includes/artikel" %}
+				</div>
+			</div>
+
+				<!-- Start Klikbare Thumbnails -->
+					<div class="row small-up-1 medium-up-2 large-up-3">
+					{% set entries = craft.entries.section('Projectportfolios').level('1') %}
+						
+						
+						<!-- Start Herhaalbaar item -->
+						{% nav entry in entries %}
+						<div class="column">
+							<a href="{{ entry.url }}">
+							{% set image = entry.featureImage.first() %}
+							{% if image %}
+							<div class="section-item-wrapper" style="background-image: url({{ image.url() }});">
+								<div class="section-item-title-wrapper">
+									<h4><i class="fa fa-caret-right"></i> {{ entry.title }}</h4>
+								</div>
+							</div>
+							{% endif %}
+
+							</a>
+						</div>
+						{% endnav %}
+
+						
+					</div>
+				<!-- Einde Klikbare Thumbnails -->
+
+		</div>
+	</div>
+
+</section>
 {% endblock %}

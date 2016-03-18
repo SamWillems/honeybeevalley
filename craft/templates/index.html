@@ -20,7 +20,7 @@
 {% extends "_layout" %}
 
 {% block content %}
-{% set asset = headers.headerAchtergrondBeeld.first() %}
+{% set asset = headers.homepageHeaderBeeld.first() %}
 <section class="hb-header hb-homepage hide-for-print" style="background-image: linear-gradient(rgba(71, 75, 82, 0.6), rgba(41, 32, 30, 0.6)), url({% if asset %} {{ asset.url }} {% endif %});">
 	<div class="row">
 		<div class="small-12 columns">
@@ -69,48 +69,7 @@
 		</div>
 		<div class="medium-5 large-3 large-offset-1 hide-for-small-only columns">
 		<!-- Start sidebar -->
-		<div class="hb-sidebar callout">
-			<h3><i class="fa fa-search"></i> Zoeken</h3>
-			<h4>Doorzoek onze website</h4>
-			<!-- Start Search -->
-			<form>
-				<div class="row">
-				    <div class="medium-12 columns">
-				        <input type="text" placeholder="...">
-				        <a class="expanded secondary button" href="#">Zoeken</a>
-				    </div>
-			  	</div>
-			</form>  	
-			<!-- End Search -->
-			<hr>
-			<!-- Start Calendar -->
-			<div class="row">
-				<div class="medium-12 columns">
-					<h3><i class="fa fa-calendar-o"></i> Kalender</h3>
-					<h4>Naderende evenementen</h4>
-					<span class="hb-cal-title"><i class="fa fa-caret-right"></i> 23 Februari 2016</span>
-					<p class="hb-cal-short-desc">Lorem ipsum dolor sit amet.</p>
-					<span class="hb-cal-title"><i class="fa fa-caret-right"></i> 28 Februari 2016</span>
-					<p class="hb-cal-short-desc">Lorem ipsum dolor.</p>
-					<span class="hb-cal-title"><i class="fa fa-caret-right"></i> 16 Maart 2016</span>
-					<p class="hb-cal-short-desc">Lorem ipsum dolor sit amet. Condimentum mattis lacus semper.</p>
-				</div>
-			</div>
-			<!-- End Calendar -->
-			<hr>
-			<!-- Start Newsletter Form -->
-			<h3><i class="fa fa-envelope-o"></i> Nieuwsbrief</h3>
-			<h4>Schrijf je in op onze nieuwsbrief</h4>
-			<form>
-				<div class="row">
-				    <div class="medium-12 columns">
-				        <input type="text" placeholder="Uw e-mail adres">
-				        <a class="expanded secondary button" href="#">Inschrijven</a>
-				    </div>
-			  	</div>
-			</form>  
-			<!-- End Newsletter Form -->
-		</div>
+		{% include "_includes/sidebar" %}
 		<!-- End sidebar -->
 		</div>
 	</div>

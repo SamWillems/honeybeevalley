@@ -1,0 +1,48 @@
+{% extends "_layout" %}
+
+{% block content %}
+{% set asset = headers.headerAchtergrondBeeld.first() %}
+<section class="hb-header hb-homepage hide-for-print" style="background-image: linear-gradient(rgba(71, 75, 82, 0.6), rgba(41, 32, 30, 0.6)), url({% if asset %} {{ asset.url }} {% endif %});">
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="hb-header-inner">
+				<h1>{{ headers.homepageHeader }}</h1>
+				<p class="hb-header-paragraph">{{ headers.homepageHeaderSubtitel }}</p>
+			</div>
+		</div>
+	</div>	
+</section>
+
+<section class="hb-main-content">
+	<div class="row">
+		<div class="small-12 medium-7 large-8 columns">
+
+		<!-- start zoek resultaten -->
+		<h1>Zoek resultaten</h1>
+
+			{% set query = craft.request.getParam('q') %}
+			{% set entries = craft.entries.search(query).order('score') %}
+
+			{% if entries|length %}
+			    <p>{{ entries|length }} results:</p>
+
+			    <ul>
+			        {% for entry in entries %}
+			            <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+			        {% endfor %}
+			    </ul>
+			{% else %}
+			    <p>Your search for “{{ query }}” didn’t return any results.</p>
+			{% endif %}
+		<!-- einde zoek resultaten -->
+		        
+		</div>
+		<div class="medium-5 large-3 large-offset-1 hide-for-small-only columns">
+		<!-- Start sidebar -->
+		{% include "_includes/sidebar" %}
+		<!-- End sidebar -->
+		</div>
+	</div>
+</section>
+
+{% endblock %}

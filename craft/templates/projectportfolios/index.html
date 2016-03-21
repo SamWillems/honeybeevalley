@@ -1,22 +1,3 @@
-{#
- # Homepage template
- # ---------------
- #
- # When this template gets loaded, it will be because someone has accessed
- # http://yoursite.com/ (without any URI). Craft checks to see if you have
- # a Single section set to be the Homepage (as you do, by default), and
- # loads the section’s Template (this file). A special ‘entry’ variable
- # will already be set for you, assigned to the Homepage entry.
- #
- # It's worth noting that even if you didn't have a Homepage Single section,
- # as long as this template remains at craft/templates/index.html, it
- # would still be the one to get loaded when accessing http://yoursite.com/,
- # albeit without an ‘entry’ variable already set for you.
- #
- # See this page for more details on how Craft routes requests:
- # http://craftcms.com/docs/routing
- #}
-
 {% extends "_layout" %}
 
 {% block content %}
@@ -61,25 +42,21 @@
 					<div class="row small-up-1 medium-up-2 large-up-3">
 					{% set entries = craft.entries.section('Projectportfolios').level('1') %}
 						
-						
 						<!-- Start Herhaalbaar item -->
 						{% nav entry in entries %}
-						<div class="column">
-							<a href="{{ entry.url }}">
-							{% set image = entry.featureImage.first() %}
-							{% if image %}
-							<div class="section-item-wrapper" style="background-image: url({{ image.url() }});">
-								<div class="section-item-title-wrapper">
-									<h4><i class="fa fa-caret-right"></i> {{ entry.title }}</h4>
-								</div>
+							<div class="column">
+								<a href="{{ entry.url }}">
+									{% for image in entry.featureImage.limit(1).order('RAND()') %}
+										<div class="section-item-wrapper" style="background-image: url({{ image.url }});">
+											<div class="section-item-title-wrapper">
+												<h4><i class="fa fa-caret-right"></i> {{ entry.title }}</h4>
+											</div>
+										</div>
+									{% endfor %}
+								</a>
 							</div>
-							{% endif %}
-
-							</a>
-						</div>
 						{% endnav %}
 
-						
 					</div>
 				<!-- Einde Klikbare Thumbnails -->
 

@@ -41,7 +41,6 @@
 								
 								{# For everything in our structure section #}
 								{% for page in craft.entries.section('Projectportfolios') %}
-									
 									{# If it is one of our "top-level" pages (we are going to manually bring #}
 									{# in an overview page for our level 1 page #}
 									{% if (page.level == 1) %}
@@ -62,15 +61,12 @@
 									)%}
 										{% set pages = pages|merge([page]) %}
 									{% endif %}
-								{% endfor %}
 
-								{% set aboutPage = entry.ancestors|length ? entry.ancestors[0] : entry %}
+
+								{% endfor %}
 
 								<ul class="vertical menu">
 									{% nav page in pages %}
-										{# Long story, but even though "About" is a level 1, I wanted it to look #}
-										{# to be on the same level as its child pages #}
-
 										<li>
 											{{ page.getLink() }}
 

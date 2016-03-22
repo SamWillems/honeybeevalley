@@ -84,7 +84,7 @@
 											<option></option>
 				    					    <option value="Heesters" {{ groep=='Heesters' ? 'Selected' }} >Heesters</option>
 				    					    <option value="Coniferen" {{ groep=='Coniferen' ? 'Selected' }} >Coniferen</option>
-				    					    <option value="vastePlanten" {{ groep=='vastePlanten' ? 'Selected' }} >Vaste Planten</option>
+				    					    <option value="Vaste planten" {{ groep=='Vaste planten' ? 'Selected' }} >Vaste Planten</option>
 				    					    <option value="Bomen" {{ groep=='Bomen' ? 'Selected' }} >Bomen</option>
 				    					    <option value="Fruitbomen" {{ groep=='Fruitbomen' ? 'Selected' }} >Fruitbomen</option>
 				    					    <option value="Kruiden" {{ groep=='Kruiden' ? 'Selected' }} >Kruiden</option>
@@ -201,7 +201,7 @@
 									section: 'plantIt',
 									order: 'score',
 									
-									search: 'naam:*'~ naam ~'* OR title:*'~ naam ~'* bijenvriendelijkheid:*'~ bijtemp ~'* OR bijenvriendelijkheid:*'~ bijen ~'* inheems:*'~ oorsprong2 ~'*',
+									search: 'naam:*'~ naam ~'* OR latijns:*'~ naam ~'* bijenvriendelijkheid:*'~ bijtemp ~'* OR bijenvriendelijkheid:*'~ bijen ~'* inheems:*'~ oorsprong2 ~'*',
 									inheems: [
 									  'and',
 									  '= *'~ oorsprong1 ~'*'
@@ -241,10 +241,12 @@
 								}) %}
 
 								{% if results|length %}
-									<p>{{ results|length }} results:</p>
+								    {% paginate results.limit(20) as pageInfo, res %}
+									<p>Resultaten - Pagina {{pageInfo.currentPage}} van {{ pageInfo.totalPages }}</p>
 									<div class="row small-up-2 medium-up-3 large-up-4">
 									
-										{% for entry in results %}
+									    
+										{% for entry in res %}
 										<div class="column">
 											<a href="{{ entry.url }}">
 											{% set image = entry.fotos.first() %}
@@ -254,18 +256,35 @@
 											{% else %}
 												<img src="{{ craft.config.environmentVariables.assetsBaseUrl }}img/plantit/no-image-available.jpg" class="thumbnail plantit-thumb" alt="{{ entry.naam }}">
 											{% endif %}
-											<p class="plantit-name">{{ entry.naam }}<br>{{ entry.title }}</p>
+											<p class="plantit-name">{{ entry.naam }}<br>{{ entry.latijns }}</p>
 
 											</a>
 										</div>	
 										{% endfor %}
-									
-									
-									{% else %}
-										<p>Geen resultaten gevonden</p>
-									{% endif %}
 				    
-								</div>
+									</div>
+									<div>
+										{% set queryString = (craft.request.getQueryStringWithoutPath() ? '?'~craft.request.getQueryStringWithoutPath()) %}
+										<a href="{{ pageInfo.firstUrl }}{{ queryString }}">First Page | </a>
+										{% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}{{ queryString }}"> Previous Page |</a>{% endif %}
+
+										{% for page, url in pageInfo.getPrevUrls(10) %}
+											<a href="{{ url }}{{ queryString }}">{{ page }}</a>
+										{% endfor %}
+
+										<span class="current">{{ pageInfo.currentPage }}</span>
+
+										{% for page, url in pageInfo.getNextUrls(10) %}
+											<a href="{{ url }}{{ queryString }}">{{ page }}</a>
+										{% endfor %}
+
+										{% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}{{ queryString }}">| Next Page </a>{% endif %}
+										<a href="{{ pageInfo.lastUrl }}{{ queryString }}">| Last Page</a>
+									</div>
+									
+								{% else %}
+									<p>Geen resultaten gevonden</p>
+								{% endif %}
 							</div>
 				    </section>
 {% endblock %}

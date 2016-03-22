@@ -1,7 +1,7 @@
 {% extends "_layout" %}
 
 {% block content %}
-{% set asset = headers.headerAchtergrondBeeld.first() %}
+{% set asset = headers.homepageHeaderBeeld.first() %}
 <section class="hb-header hb-homepage hide-for-print" style="background-image: linear-gradient(rgba(71, 75, 82, 0.6), rgba(41, 32, 30, 0.6)), url({% if asset %} {{ asset.url }} {% endif %});">
 	<div class="row">
 		<div class="small-12 columns">
@@ -18,11 +18,12 @@
 		<div class="small-12 medium-7 large-8 columns">
 
 		<!-- start zoek resultaten -->
-		<h1>Zoek resultaten</h1>
+		<h1>Zoekresultaten</h1>
 
 			{% set query = craft.request.getParam('q') %}
 			{% set entries = craft.entries.search(query).order('score') %}
 
+		{% for entry in pageEntries %}
 			{% if entries|length %}
 			    <p>{{ entries|length }} results:</p>
 
@@ -32,8 +33,9 @@
 			        {% endfor %}
 			    </ul>
 			{% else %}
-			    <p>Your search for “{{ query }}” didn’t return any results.</p>
+			    <p>Uw zoekopdracht voor “{{ query }}” heeft geen resultaten opgeleverd ...</p>
 			{% endif %}
+		{% endfor %}	
 		<!-- einde zoek resultaten -->
 		        
 		</div>

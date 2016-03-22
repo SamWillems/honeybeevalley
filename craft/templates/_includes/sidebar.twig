@@ -5,7 +5,7 @@
 	<form action="{{ url('search/results') }}">
 		<div class="row">
 		    <div class="medium-12 columns">
-		        <input type="search" placeholder="zoeken">
+		        <input type="search" name="q" placeholder="zoeken">
 		        <input type="submit" value="Zoeken" class="expanded secondary button">
 		    </div>
 	  	</div>
@@ -26,6 +26,7 @@
 		</div>
 	</div>
 	<!-- End Calendar -->
+	{#
 	<hr>
 	<!-- Start Newsletter Form -->
 	<h3><i class="fa fa-envelope-o"></i> Nieuwsbrief</h3>
@@ -39,4 +40,5 @@
 	  	</div>
 	</form>  
 	<!-- End Newsletter Form -->
+	#}
 </div>

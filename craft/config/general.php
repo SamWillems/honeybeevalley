@@ -9,7 +9,8 @@
 
 return array(
     '*' => array(
-        'omitScriptNameInUrls' => true,
+        'omitScriptNameInUrls'  => true,
+        'maxUploadFileSize'     => 33554432,
     ),
 
     'honeybeevalley.dev' => array(

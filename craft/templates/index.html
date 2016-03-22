@@ -37,7 +37,7 @@
 		<div class="small-12 medium-7 large-8 columns">
 
 		<!-- start blog items -->
-		{% paginate craft.entries.section('homepage').limit(5) as pageEntries %}
+		{% paginate craft.entries.section('homepage').limit(3) as pageInfo, pageEntries %}
 			{% for entry in pageEntries %}
 				<div class="news-item">
 					<div class="row">
@@ -65,6 +65,31 @@
 			    </div>
 		    {% endfor %}
 		<!-- end blog items -->
+
+		<!-- Start Paginatie -->
+		<ul class="pagination" role="navigation" aria-label="Pagination">
+		    {% if pageInfo.prevUrl %}
+		    	<li class="pagination-previous"><a href="{{ pageInfo.prevUrl }}">Vorige </a> <span class="show-for-sr">page</span></li>
+		    {% else %}
+		    	<li class="pagination-previous disabled">Vorige <span class="show-for-sr">page</span></li>
+		    {% endif %}
+		    {% for page, url in pageInfo.getPrevUrls(5) %}
+		    	<li><a href="{{ url }}">{{ page }}</a></li>
+		    {% endfor %}
+
+		    <li class="current">{{ pageInfo.currentPage }}<span class="show-for-sr">{{ pageInfo.currentPage }}</li>
+
+			{% for page, url in pageInfo.getNextUrls(5) %}
+		    	<li><a href="{{ url }}">{{ page }}</a></li>
+			{% endfor %}
+			{% if pageInfo.nextUrl %}
+				<li class="pagination-next"><a href="{{ pageInfo.nextUrl }}">Volgende</a> <span class="show-for-sr">page</span></li>
+		    {% else %}
+		    <li class="pagination-next disabled">Volgende <span class="show-for-sr">page</span></li>
+		    {% endif %}
+		</ul>
+		<!-- Einde Paginatie -->
+
 		        
 		</div>
 		<div class="medium-5 large-3 large-offset-1 hide-for-small-only columns">

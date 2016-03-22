@@ -34,20 +34,50 @@
 				    		<div class="small-12 medium-4 large-3 columns hide-for-print">
 				    			<div class="side-nav-wrapper callout">
 				    			<h4>Navigatie</h4>
-				    				{% set entries = craft.entries.section('manageIt') %}
-				    				<ul class="vertical menu" data-accordion-menu>
-				    					{% nav entry in entries %}
-						    				  <li>
-						    				    <a href="{{ entry.url }}">{{ entry.title }}</a>
-						    				    {% ifchildren %}
-						    				    <ul class="menu vertical nested">
-						    				      {% children %}
-						    				    </ul>
-						    				    {% endifchildren %}
-						    				  </li>
-				    				  {% endnav %}
-				    				</ul>
+				    				{# Need to manually step through our entries and apply some logic to see if #}
+									{# they should show in our our dynamic nav, based on how far down in the #}
+									{# structure we are. Start out by initializing an empty array. #}
+									{% set pages = [] %}
+									
+									{# For everything in our structure section #}
+									{% for page in craft.entries.section('manageIt') %}
+										{# If it is one of our "top-level" pages (we are going to manually bring #}
+										{# in an overview page for our level 1 page #}
+										{% if (page.level == 1) %}
 
+											{# Automatically add it to the array #}
+											{% set pages = pages|merge([page]) %}
+
+										{% endif %}
+										
+										{# If it is a deep page, and (is the current page, or is a sibling of the #}
+										{# page common second-level parent, or is a child of this page) #}
+										{% if (
+											( page.level == 2 ) and (
+												( page.id == entry.id ) or
+												( page.isSiblingOf(entry) ) or
+												( page.isDescendantOf(entry) and ( entry.level != 2 ) )
+										  )
+										)%}
+											{% set pages = pages|merge([page]) %}
+										{% endif %}
+
+
+									{% endfor %}
+
+									<ul class="vertical menu">
+										{% nav page in pages %}
+											<li>
+												{{ page.getLink() }}
+
+												{% ifchildren %}
+													<ul class="nested vertical menu">
+														<li>{% children %}</li>
+													</ul>
+												{% endifchildren %}
+											</li>
+										{% endnav %}
+									</ul>
 				    			</div>
 				    		</div>
 				    		<div class="small-12 medium-8 large-9 columns">

@@ -13,8 +13,7 @@
 				    </section>
 				    {% set naam = craft.request.getParam('naam') ? craft.request.getParam('naam') : '' %}
 					{% set latijns = craft.request.getParam('latijns') ? craft.request.getParam('latijns') : '' %}
-					{% set oorsprong1 = craft.request.getParam('oorsprong1') ? craft.request.getParam('oorsprong1') : '' %}
-					{% set oorsprong2 = craft.request.getParam('oorsprong2') ? craft.request.getParam('oorsprong2') : '' %}
+					{% set oorsprong = craft.request.getParam('oorsprong') ? craft.request.getParam('oorsprong') : '' %}
 					{% set groep = craft.request.getParam('groep') ? craft.request.getParam('groep') : '' %}
 					{% set bloemkleur = craft.request.getParam('bloemkleur') ? craft.request.getParam('bloemkleur') : '' %}
 					{% set bloeimaand = craft.request.getParam('bloeimaand') ? craft.request.getParam('bloeimaand') : '' %}
@@ -56,9 +55,9 @@
 				    				
 				    				  	<fieldset class="fieldset">
 				    						<legend>Oorsprong</legend>
-				    						<input onchange="this.form.submit()" id="checkbox-inheems" type="checkbox" name="oorsprong1" value="inheems" {{ oorsprong1=='inheems' ? 'checked' }}>
+				    						<input onchange="this.form.submit()" id="checkbox-inheems" type="radio" name="oorsprong" value="inheems" {{ oorsprong=='inheems' ? 'checked' }}>
 				    						<label for="checkbox-inheems">Inheems</label><br>
-				    						<input onchange="this.form.submit()" id="checkbox-uitheems" type="checkbox" name="oorsprong2" value="uitheems" {{ oorsprong2=='uitheems' ? 'checked' }}>
+				    						<input onchange="this.form.submit()" id="checkbox-uitheems" type="radio" name="oorsprong" value="uitheems" {{ oorsprong=='uitheems' ? 'checked' }}>
 				    						<label for="checkbox-uitheems">Uitheems</label>
 				    					</fieldset>
 				    
@@ -179,15 +178,15 @@
 				    		<div class="small-12 medium-8 large-9 columns">
 				    			<h3 class="article-title">Zoekresultaten</h3>
 				    			<div class="article-body-text">
-								{{ bijen }} {{ bijtemp}}
+								
 								{% set results = craft.entries({
 									section: 'plantIt',
 									order: 'score',
 									
-									search: 'naam:*'~ naam ~'* OR latijns:*'~ naam ~'* bijenvriendelijkheid:*'~ bijtemp ~'* OR bijenvriendelijkheid:*'~ bijen ~'* inheems:*'~ oorsprong2 ~'*',
+									search: 'naam:*'~ naam ~'* OR latijns:*'~ naam ~'* bijenvriendelijkheid:*'~ bijtemp ~'* OR bijenvriendelijkheid:*'~ bijen ~'*',
 									inheems: [
 									  'and',
-									  '= *'~ oorsprong1 ~'*'
+									  '= *'~ oorsprong ~'*'
 									],
 									groep: [
 									  'and',

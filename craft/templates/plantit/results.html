@@ -1,22 +1,3 @@
-{#
- # Homepage template
- # ---------------
- #
- # When this template gets loaded, it will be because someone has accessed
- # http://yoursite.com/ (without any URI). Craft checks to see if you have
- # a Single section set to be the Homepage (as you do, by default), and
- # loads the section’s Template (this file). A special ‘entry’ variable
- # will already be set for you, assigned to the Homepage entry.
- #
- # It's worth noting that even if you didn't have a Homepage Single section,
- # as long as this template remains at craft/templates/index.html, it
- # would still be the one to get loaded when accessing http://yoursite.com/,
- # albeit without an ‘entry’ variable already set for you.
- #
- # See this page for more details on how Craft routes requests:
- # http://craftcms.com/docs/routing
- #}
-
 {% extends "_layout" %}
 
 {% block content %}
@@ -75,8 +56,10 @@
 				    				
 				    				  	<fieldset class="fieldset">
 				    						<legend>Oorsprong</legend>
-				    						<input onchange="this.form.submit()" id="checkbox12" type="checkbox" name="oorsprong1" value="inheems" {{ oorsprong1=='inheems' ? 'checked' }}><label for="checkbox12">Inheems</label><br>
-				    						<input onchange="this.form.submit()" id="checkbox22" type="checkbox" name="oorsprong2" value="uitheems" {{ oorsprong2=='uitheems' ? 'checked' }}><label for="checkbox22">Uitheems</label>
+				    						<input onchange="this.form.submit()" id="checkbox-inheems" type="checkbox" name="oorsprong1" value="inheems" {{ oorsprong1=='inheems' ? 'checked' }}>
+				    						<label for="checkbox-inheems">Inheems</label><br>
+				    						<input onchange="this.form.submit()" id="checkbox-uitheems" type="checkbox" name="oorsprong2" value="uitheems" {{ oorsprong2=='uitheems' ? 'checked' }}>
+				    						<label for="checkbox-uitheems">Uitheems</label>
 				    					</fieldset>
 				    
 				    					<label>Groep
@@ -256,31 +239,44 @@
 											{% else %}
 												<img src="{{ craft.config.environmentVariables.assetsBaseUrl }}img/plantit/no-image-available.jpg" class="thumbnail plantit-thumb" alt="{{ entry.naam }}">
 											{% endif %}
-											<p class="plantit-name">{{ entry.naam }}<br>{{ entry.latijns }}</p>
+											<p class="plantit-name">{{ entry.naam }}<br><em>{{ entry.latijns }}</em></p>
 
 											</a>
 										</div>	
 										{% endfor %}
 				    
 									</div>
-									<div>
-										{% set queryString = (craft.request.getQueryStringWithoutPath() ? '?'~craft.request.getQueryStringWithoutPath()) %}
-										<a href="{{ pageInfo.firstUrl }}{{ queryString }}">First Page | </a>
-										{% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}{{ queryString }}"> Previous Page |</a>{% endif %}
+									
+										<ul class="pagination text-center" role="navigation" aria-label="Pagination">
+											{% set queryString = (craft.request.getQueryStringWithoutPath() ? '?'~craft.request.getQueryStringWithoutPath()) %}
 
-										{% for page, url in pageInfo.getPrevUrls(10) %}
-											<a href="{{ url }}{{ queryString }}">{{ page }}</a>
-										{% endfor %}
+												<li class="pagination-previous"><a href="{{ pageInfo.firstUrl }}{{ queryString }}">Eerste pagina</a></li>
+											
+											{% if pageInfo.prevUrl %}
+												<li class="pagination-previous"><a href="{{ pageInfo.prevUrl }}{{ queryString }}">Vorige </a> <span class="show-for-sr">page</span></li>
+											{% else %}
+		    									<li class="pagination-previous disabled">Vorige <span class="show-for-sr">page</span></li>
+											{% endif %}
 
-										<span class="current">{{ pageInfo.currentPage }}</span>
+											{% for page, url in pageInfo.getPrevUrls(3) %}
+												<li><a href="{{ url }}{{ queryString }}">{{ page }}</a></li>
+											{% endfor %}
 
-										{% for page, url in pageInfo.getNextUrls(10) %}
-											<a href="{{ url }}{{ queryString }}">{{ page }}</a>
-										{% endfor %}
+											<li class="current">{{ pageInfo.currentPage }}</li>
 
-										{% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}{{ queryString }}">| Next Page </a>{% endif %}
-										<a href="{{ pageInfo.lastUrl }}{{ queryString }}">| Last Page</a>
-									</div>
+											{% for page, url in pageInfo.getNextUrls(3) %}
+												<li><a href="{{ url }}{{ queryString }}">{{ page }}</a></li>
+											{% endfor %}
+
+											{% if pageInfo.nextUrl %}
+												<li class="pagination-next"><a href="{{ pageInfo.nextUrl }}{{ queryString }}">Volgende</a></li>
+											{% else %}
+		    									<li class="pagination-next disabled">Volgende <span class="show-for-sr">page</span></li>	
+											{% endif %}
+
+												<li class="pagination-next"><a href="{{ pageInfo.lastUrl }}{{ queryString }}">Laatste pagina</a></li>
+										</ul>	
+									
 									
 								{% else %}
 									<p>Geen resultaten gevonden</p>

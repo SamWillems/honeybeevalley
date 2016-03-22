@@ -67,7 +67,7 @@
 		<!-- end blog items -->
 
 		<!-- Start Paginatie -->
-		<ul class="pagination" role="navigation" aria-label="Pagination">
+		<ul class="pagination text-center" role="navigation" aria-label="Pagination">
 		    {% if pageInfo.prevUrl %}
 		    	<li class="pagination-previous"><a href="{{ pageInfo.prevUrl }}">Vorige </a> <span class="show-for-sr">page</span></li>
 		    {% else %}
@@ -85,7 +85,7 @@
 			{% if pageInfo.nextUrl %}
 				<li class="pagination-next"><a href="{{ pageInfo.nextUrl }}">Volgende</a> <span class="show-for-sr">page</span></li>
 		    {% else %}
-		    <li class="pagination-next disabled">Volgende <span class="show-for-sr">page</span></li>
+		    	<li class="pagination-next disabled">Volgende <span class="show-for-sr">page</span></li>
 		    {% endif %}
 		</ul>
 		<!-- Einde Paginatie -->

@@ -40,12 +40,15 @@
                     <li><a href="/kalender">Kalender</a></li>
                     <li><a href="/staff">Staff</a></li>
                 </ul>
+                <!--
                 <form class="oc-search">
                     <div class="input-group">
                         <span class="input-group-label"><i class="fa fa-search"></i></span>
                         <input class="input-group-field" type="text" placeholder="Zoeken">
                     </div>
                 </form>
+                -->
+                <!--
                 <section class="oc-cal">
                     <h1><i class="fa fa-calendar-o"></i> Kalender</h1>
                     <h2><i class="fa fa-caret-right"></i> 23 Februari 2016</h2>
@@ -55,30 +58,37 @@
                     <h2><i class="fa fa-caret-right"></i> 23 Februari 2016</h2>
                     <p class="oc-cal-short-desc">Lorem ipsum dolor sit amet.</p>
                 </section>
+                -->
             </div>
             <div class="off-canvas-content" data-off-canvas-content>
-                {# ---------------------------------------------------------------------------------------------------------- Login bar nog optie maken in cms - actief of niet
-                <section class="login-bar hide-for-print">
-                    <div class="row">
-                        <div class="small-12 columns">
-                            <ul class="dropdown menu login-menu align-right" data-dropdown-menu>
-                                <li>
-                                    <a href="#"><i class="fa fa-globe"></i> <span><i class="fa fa-caret-down"></i></span></a>
-                                    {% set element = (entry is defined ? entry : null) %}
-                                    <ul class="menu">
-                                        <li><a href="{{ ll('nl_be', element) }}">Nederlands</a></li>
-                                        <li><a href="{{ ll('fr_be', element) }}">Frans</a></li>
-                                        <li><a href="{{ ll('en', element) }}">Engels</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-lock"></i> <span>Login</span></a>
-                                </li>
-                            </ul>
+
+                {% if topBar.topBar %}
+                    <section class="login-bar hide-for-print">
+                        <div class="row">
+                            <div class="small-12 columns">
+                                <ul class="dropdown menu login-menu align-right" data-dropdown-menu>
+                                    {% if topBar.talen %}
+                                        <li>
+                                            <a href="#"><i class="fa fa-globe"></i> <span><i class="fa fa-caret-down"></i></span></a>
+                                            {% set element = (entry is defined ? entry : null) %}
+                                            <ul class="menu">
+                                                {% if topBar.taalNl %}<li><a href="{{ ll('nl_be', element) }}">Nederlands</a></li>{% endif %}
+                                                {% if topBar.taalFr %}<li><a href="{{ ll('fr_be', element) }}">Frans</a></li>{% endif %}
+                                                {% if topBar.taalEn %}<li><a href="{{ ll('en', element) }}">Engels</a></li>{% endif %}
+                                            </ul>
+                                        </li>
+                                    {% endif %}    
+                                    {% if topBar.loginRegister %}
+                                        <li>
+                                            <a href="#"><i class="fa fa-lock"></i> <span>Login</span></a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </section>
-                #}
+                    </section>
+                {% endif %}
+                
                 <section class="navigation show-for-medium hide-for-print">
                     <div class="row">
                         <div class="medium-1 large-3 columns">

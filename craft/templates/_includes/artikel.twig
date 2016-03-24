@@ -51,11 +51,10 @@
 	{# Begin Afbeelding #}
 	{% case 'blokAfbeelding' %}
 	    {% set asset = block.artikelAfbeelding.first() %}
-    	{% if block.Positie == 'right' %}
-    		<img class="article-image-right" src="{{ asset.getUrl('artikelAfbeelding') }}" alt="{{ asset.title }}">
-    	{% else %}
-    		<img class="article-image-left" src="{{ asset.getUrl('artikelAfbeelding') }}" alt="{{ asset.title }}">
-    	{% endif %}
+		<div class="{% if block.Positie == 'right' %}article-image-right{% else %}article-image-left{% endif %}">
+			<img src="{{ asset.getUrl('artikelAfbeelding') }}" alt="{{ asset.title }}">
+			<p class="image-caption">{{ block.caption }}</p>
+		</div>
 	{# Einde Afbeelding #}
 
 	{# Begin Full width Afbeelding #}
@@ -65,6 +64,7 @@
 	    {% set asset = block.artikelFwAfbeelding.first() %}
 			<img src="{{ asset.url }}" alt="{{ asset.title }}">
 		{% endif %}
+		<p class="image-caption">{{ block.caption }}</p>
 	</div>
 
 	{# Begin Gallerij #}
@@ -104,29 +104,61 @@
 		</div>
 	</div>
 
-	{# 
+	{# Begin Artikel Footer #}
+	{% case 'blokArtikelFooter' %}
 	<table class="hover stack article-info-table">
 		<tbody>
           <tr>
-            <td width="25%"><strong>Betrokken onderzoeker:</strong></td>
-            <td>Karel Schoonvaere</td>
+            <td width="25%"><strong>Betrokken onderzoeker(s):</strong></td>
+            <td>{{ block.onderzoeker }}</td>
           </tr>
           <tr>
             <td><strong>Belangrijkste realisaties:</strong></td>
-            <td>(Hier volgt een omschrijving van de belangrijkste realisaties van het project/mandaat. Dit gaat echter wel meestal bij afgelopen projecten/mandaten kunnen ingevuld worden.)</td>
+            <td>{{ block.realisaties }}</td>
           </tr>
           <tr>
             <td><strong>Output:</strong></td>
-            <td>
-            	<ul class="fa-ul">
-            		<li><i class="fa-li fa fa-caret-right"></i><a href="#">Link naar eerste output</a></li>
-            		<li><i class="fa-li fa fa-caret-right"></i><a href="#">Een andere link naar ergens anders</a></li>
-            	</ul>
-            </td>
+            <td>{{ block.output }}</td>
           </tr>
         </tbody>
     </table>
-    #}
+    {# Einde Artikel Footer #}
 
+    {# Begin Download #}
+    {% case 'blokArtikelDownload' %}
+    <div class="callout">
+    	{% for bestand in block.bestand %}
+			<a href="{{ bestand.getUrl() }}" download="{{ bestand.getUrl() }}"><i class="fa fa-download"></i> Download - <span><em>{{ block.omschrijving }}</em></span></a>
+		{% endfor %}
+	</div>
+	{# Einde Download #}
+
+	{# Begin Artikel Header #}
+	{% case 'blokArtikelHeader' %}
+    <table class="hover stack article-info-table">
+        <tbody>
+          <tr>
+            <td width="20%"><strong>Acroniem:</strong></td>
+            <td>{{ block.acroniem }}</td>
+          </tr>
+          <tr>
+            <td><strong>Financiering:</strong></td>
+            <td>{{ block.financiering }}</td>
+          </tr>
+          <tr>
+            <td><strong>Promotor:</strong></td>
+            <td>{{ block.promotor }}</td>
+          </tr>
+          <tr>
+            <td><strong>Co-Promotoren:</strong></td>
+            <td>{{ block.coPromotoren }}</td>
+          </tr>
+          <tr>
+            <td><strong>Periode:</strong></td>
+            <td>{{ block.periode }}</td>
+          </tr>
+        </tbody>
+    </table>
+    {# Einde Artikel Header #}
 	{% endswitch %}
 {% endfor %}

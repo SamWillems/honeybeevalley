@@ -1,7 +1,8 @@
 {% extends "_layout" %}
 {% block content %}
 
-<section class="hb-header hb-homepage hide-for-print">
+{% set asset = headers.homepageHeaderBeeld.first() %}
+<section class="hb-header hide-for-print" style="background-image: linear-gradient(rgba(71, 75, 82, 0.6), rgba(41, 32, 30, 0.6)), url({% if asset %} {{ asset.url }} {% endif %});">
 	<div class="row">
 		<div class="small-12 columns">
 			<div class="hb-header-inner">

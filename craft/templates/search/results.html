@@ -23,19 +23,18 @@
 			{% set query = craft.request.getParam('q') %}
 			{% set entries = craft.entries.search(query).order('score') %}
 
-		{% for entry in pageEntries %}
-			{% if entries|length %}
-			    <p>{{ entries|length }} results:</p>
+				{% if entries|length %}
+				    <p>{{ entries|length }} results:</p>
 
-			    <ul>
-			        {% for entry in entries %}
-			            <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
-			        {% endfor %}
-			    </ul>
-			{% else %}
-			    <p>Uw zoekopdracht voor “{{ query }}” heeft geen resultaten opgeleverd ...</p>
-			{% endif %}
-		{% endfor %}	
+				    <ul>
+				        {% for entry in entries %}
+				            <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+				        {% endfor %}
+				    </ul>
+				{% else %}
+				    <p>Uw zoekopdracht voor “{{ query }}” heeft geen resultaten opgeleverd ...</p>
+				{% endif %}
+	
 		<!-- einde zoek resultaten -->
 		        
 		</div>

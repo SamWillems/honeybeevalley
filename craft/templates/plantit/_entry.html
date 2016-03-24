@@ -5,12 +5,13 @@
 {% endblock %}
 
 {% block content %}
-<section class="hb-header hb-plantit hide-for-print">
+{% set asset = headers.plantItHeaderBeeld.first() %}
+<section class="hb-header hide-for-print" style="background-image: linear-gradient(rgba(71, 75, 82, 0.6), rgba(41, 32, 30, 0.6)), url({% if asset %} {{ asset.url }} {% endif %});">
 	<div class="row">
 		<div class="small-12 columns">
 			<div class="hb-header-inner">
-				<h1>Plant It</h1>
-				<p class="hb-header-paragraph"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie convallis vestibulum. Etiam iaculis euismod orci, id ultricies augue malesuada nec. Maecenas ut nulla at risus aliquam efficitur.</p>
+				<h1>{{ headers.plantItHeader }}</h1>
+				<p class="hb-header-paragraph">{{ headers.plantItHeaderSubtitel }}</p>
 			</div>
 		</div>
 	</div>	
@@ -157,7 +158,7 @@
 		</div>
 
 		<div class="small-12 medium-8 large-9 columns">
-			<h3 class="article-title">{{entry.naam}} - {{entry.latijns}}</h3>
+			<h3 class="article-title">{{entry.naam}}<span class="plantit-latijnse-titel"><em>{{entry.latijns}}</em></span></h3>
 			
 			<!-- Start 2 Kolommen -->
 			<div class="row">
@@ -172,7 +173,7 @@
 				{% set image = entry.fotos %}
 				<div class="plantit-slider-nav slick-slider">
 					{% for image in entry.fotos %}
-				  	<div><img class="thumbnail" src="{{ image.getUrl('plantItThumb') }}" alt="{{entry.naam}}"></div>
+				  	<div><img class="plantit-slide-thumb" src="{{ image.getUrl('plantItThumb') }}" alt="{{entry.naam}}"></div>
 				    {% endfor %}
 				</div>
 
@@ -180,22 +181,28 @@
 				<div class="small-12 medium-7 columns">
 					<table class="hover">
 					  <tbody>
-					    <tr>
-					      <td><strong>Latijnse Naam</strong></td>
-					      <td>{{ entry.latijns }}</td>
-					    </tr>
-					    <tr>
-					      <td><strong>Naam</strong></td>
-					      <td>{{ entry.naam }}</td>
-					    </tr>
-					    <tr>
-					      <td><strong>Oorsprong</strong></td>
-							<td>
-							{% for option in entry.inheems %}
-								{{ option.label }}{{ loop.index < loop.length ? ', ' }} 
-							{% endfor %}
-							</td>
-					    </tr>
+					  	{% if entry.latijns %}
+						    <tr>
+						      <td><strong>Latijnse Naam</strong></td>
+						      <td>{{ entry.latijns }}</td>
+						    </tr>
+					    {% endif %}
+					    {% if entry.naam %}
+						    <tr>
+						      <td><strong>Naam</strong></td>
+						      <td>{{ entry.naam }}</td>
+						    </tr>
+					    {% endif %}
+					    {% if entry.inheems %}
+						    <tr>
+						      <td><strong>Oorsprong</strong></td>
+								<td>
+								{% for option in entry.inheems %}
+									{{ option.label }}{{ loop.index < loop.length ? ', ' }} 
+								{% endfor %}
+								</td>
+						    </tr>
+					    {% endif %}
 					    <tr>
 					      <td><strong>Familie</strong></td>
 					      <td>{{ entry.familie }}  </td>

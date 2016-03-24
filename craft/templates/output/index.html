@@ -1,12 +1,13 @@
 {% extends "_layout" %}
 
 {% block content %}
-<section class="hb-header hb-overons hide-for-print">
+{% set asset = headers.outputHeaderBeeld.first() %}
+<section class="hb-header hide-for-print" style="background-image: linear-gradient(rgba(71, 75, 82, 0.6), rgba(41, 32, 30, 0.6)), url({% if asset %} {{ asset.url }} {% endif %});">
 	<div class="row">
 		<div class="small-12 columns">
 			<div class="hb-header-inner">
-				<h1>Over ons</h1>
-				<p class="hb-header-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie convallis vestibulum. Etiam iaculis euismod orci, id ultricies augue malesuada nec. Maecenas ut nulla at risus aliquam efficitur.</p>
+				<h1>{{ headers.outputHeader }}</h1>
+				<p class="hb-header-paragraph">{{ headers.outputHeaderSubtitel }}</p>
 			</div>
 		</div>
 	</div>	

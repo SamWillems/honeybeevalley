@@ -1,94 +1,95 @@
 {% extends "_layout" %}
 
 {% block content %}
-					<section class="hb-header hb-overons hide-for-print">
-				    	<div class="row">
-				    		<div class="small-12 columns">
-				    			<div class="hb-header-inner">
-				    				<h1>Over ons</h1>
-				    				<p class="hb-header-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie convallis vestibulum. Etiam iaculis euismod orci, id ultricies augue malesuada nec. Maecenas ut nulla at risus aliquam efficitur.</p>
-				    			</div>
-				    		</div>
-				    	</div>	
-				    </section>
+{% set asset = headers.manageItHeaderBeeld.first() %}
+<section class="hb-header hide-for-print" style="background-image: linear-gradient(rgba(71, 75, 82, 0.6), rgba(41, 32, 30, 0.6)), url({% if asset %} {{ asset.url }} {% endif %});">
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="hb-header-inner">
+				<h1>{{ headers.manageItHeader }}</h1>
+				<p class="hb-header-paragraph">{{ headers.manageItHeaderSubtitel }}</p>
+			</div>
+		</div>
+	</div>	
+</section>
 				    
-				    <section class="hb-main-content">
+<section class="hb-main-content">
 
-				    	<div class="row">
-				    		<div class="small-12 columns hide-for-print">
-				    			<nav aria-label="You are here:" role="navigation">
-				    		        <ul class="breadcrumbs">
-				    		        <li><a href="/manageit">{{ entry.section.name }}</a></li>
-				    		        {% if entry.level > 1 %}
-								        {% for crumb in entry.getAncestors() %}
-								            <li>{{ crumb.getLink() }}</li>
-								        {% endfor %}
-									{% endif %}
-									<li>{{ entry.title }}</li>
-									</ul>
-				    		    </nav>
-				    		</div>
-				    	</div>
-				    
-				    	<div class="row">
-				    		<div class="small-12 medium-4 large-3 columns hide-for-print">
-				    			<div class="side-nav-wrapper callout">
-				    			<h4>Navigatie</h4>
-				    				{# Need to manually step through our entries and apply some logic to see if #}
-									{# they should show in our our dynamic nav, based on how far down in the #}
-									{# structure we are. Start out by initializing an empty array. #}
-									{% set pages = [] %}
-									
-									{# For everything in our structure section #}
-									{% for page in craft.entries.section('manageIt') %}
-										{# If it is one of our "top-level" pages (we are going to manually bring #}
-										{# in an overview page for our level 1 page #}
-										{% if (page.level == 1) %}
+	<div class="row">
+		<div class="small-12 columns hide-for-print">
+			<nav aria-label="You are here:" role="navigation">
+		        <ul class="breadcrumbs">
+		        <li><a href="/manageit">{{ entry.section.name }}</a></li>
+		        {% if entry.level > 1 %}
+			        {% for crumb in entry.getAncestors() %}
+			            <li>{{ crumb.getLink() }}</li>
+			        {% endfor %}
+				{% endif %}
+				<li>{{ entry.title }}</li>
+				</ul>
+		    </nav>
+		</div>
+	</div>
 
-											{# Automatically add it to the array #}
-											{% set pages = pages|merge([page]) %}
+	<div class="row">
+		<div class="small-12 medium-4 large-3 columns hide-for-print">
+			<div class="side-nav-wrapper callout">
+			<h4>Navigatie</h4>
+				{# Need to manually step through our entries and apply some logic to see if #}
+				{# they should show in our our dynamic nav, based on how far down in the #}
+				{# structure we are. Start out by initializing an empty array. #}
+				{% set pages = [] %}
+				
+				{# For everything in our structure section #}
+				{% for page in craft.entries.section('manageIt') %}
+					{# If it is one of our "top-level" pages (we are going to manually bring #}
+					{# in an overview page for our level 1 page #}
+					{% if (page.level == 1) %}
 
-										{% endif %}
-										
-										{# If it is a deep page, and (is the current page, or is a sibling of the #}
-										{# page common second-level parent, or is a child of this page) #}
-										{% if (
-											( page.level == 2 ) and (
-												( page.id == entry.id ) or
-												( page.isSiblingOf(entry) ) or
-												( page.isDescendantOf(entry) and ( entry.level != 2 ) )
-										  )
-										)%}
-											{% set pages = pages|merge([page]) %}
-										{% endif %}
+						{# Automatically add it to the array #}
+						{% set pages = pages|merge([page]) %}
+
+					{% endif %}
+					
+					{# If it is a deep page, and (is the current page, or is a sibling of the #}
+					{# page common second-level parent, or is a child of this page) #}
+					{% if (
+						( page.level == 2 ) and (
+							( page.id == entry.id ) or
+							( page.isSiblingOf(entry) ) or
+							( page.isDescendantOf(entry) and ( entry.level != 2 ) )
+					  )
+					)%}
+						{% set pages = pages|merge([page]) %}
+					{% endif %}
 
 
-									{% endfor %}
+				{% endfor %}
 
-									<ul class="vertical menu">
-										{% nav page in pages %}
-											<li>
-												{{ page.getLink() }}
+				<ul class="vertical menu">
+					{% nav page in pages %}
+						<li>
+							{{ page.getLink() }}
 
-												{% ifchildren %}
-													<ul class="nested vertical menu">
-														<li>{% children %}</li>
-													</ul>
-												{% endifchildren %}
-											</li>
-										{% endnav %}
-									</ul>
-				    			</div>
-				    		</div>
-				    		<div class="small-12 medium-8 large-9 columns">
-				    			
-				    			
-				    			<h3 class="article-title">{{ entry.title }}</h3>
+							{% ifchildren %}
+								<ul class="nested vertical menu">
+									<li>{% children %}</li>
+								</ul>
+							{% endifchildren %}
+						</li>
+					{% endnav %}
+				</ul>
+			</div>
+		</div>
+		<div class="small-12 medium-8 large-9 columns">
+			
+			
+			<h3 class="article-title">{{ entry.title }}</h3>
 
-				    			{% include "_includes/artikel" %}
+			{% include "_includes/artikel" %}
 
-				    		</div>
-				    	</div>
-				    
-				    </section>
+		</div>
+	</div>
+
+</section>
 {% endblock %}

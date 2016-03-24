@@ -1,0 +1,142 @@
+{% extends "_layout" %}
+
+{% block content %}
+{% set asset = headers.staffHeaderBeeld.first() %}
+<section class="hb-header hide-for-print" style="background-image: linear-gradient(rgba(71, 75, 82, 0.6), rgba(41, 32, 30, 0.6)), url({% if asset %} {{ asset.url }} {% endif %});">
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="hb-header-inner">
+				<h1>{{ headers.staffHeader }}</h1>
+				<p class="hb-header-paragraph">{{ headers.staffHeaderSubtitel }}</p>
+			</div>
+		</div>
+	</div>	
+</section>
+				    
+<section class="hb-main-content">
+
+	<div class="row">
+		<div class="small-12 columns hide-for-print">
+			<nav aria-label="You are here:" role="navigation">
+		        <ul class="breadcrumbs">
+		        <li><a href="/partners">{{ entry.section.name }}</a></li>
+		        {% if entry.level > 1 %}
+			        {% for crumb in entry.getAncestors() %}
+			            <li>{{ crumb.getLink() }}</li>
+			        {% endfor %}
+				{% endif %}
+				<li>{{ entry.title }}</li>
+				</ul>
+		    </nav>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="small-12 medium-4 large-3 columns hide-for-print">
+			<div class="side-nav-wrapper callout">
+			<h4>Navigatie</h4>
+				{# Need to manually step through our entries and apply some logic to see if #}
+				{# they should show in our our dynamic nav, based on how far down in the #}
+				{# structure we are. Start out by initializing an empty array. #}
+				{% set pages = [] %}
+				
+				{# For everything in our structure section #}
+				{% for page in craft.entries.section('staff') %}
+					{# If it is one of our "top-level" pages (we are going to manually bring #}
+					{# in an overview page for our level 1 page #}
+					{% if (page.level == 1) %}
+
+						{# Automatically add it to the array #}
+						{% set pages = pages|merge([page]) %}
+
+					{% endif %}
+					
+					{# If it is a deep page, and (is the current page, or is a sibling of the #}
+					{# page common second-level parent, or is a child of this page) #}
+					{% if (
+						( page.level == 2 ) and (
+							( page.id == entry.id ) or
+							( page.isSiblingOf(entry) ) or
+							( page.isDescendantOf(entry) and ( entry.level != 2 ) )
+					  )
+					)%}
+						{% set pages = pages|merge([page]) %}
+					{% endif %}
+
+
+				{% endfor %}
+
+				<ul class="vertical menu">
+					{% nav page in pages %}
+						<li>
+							{{ page.getLink() }}
+
+							{% ifchildren %}
+								<ul class="nested vertical menu">
+									<li>{% children %}</li>
+								</ul>
+							{% endifchildren %}
+						</li>
+					{% endnav %}
+				</ul>
+			</div>
+		</div>
+		<div class="small-12 medium-8 large-9 columns">
+			
+			
+			<h3 class="article-title">{{ entry.title }}</h3>
+
+			<div class="row small-up-1 medium-up-2 large-up-4">
+			{% for entry in entry.staff %}
+				  <div class="column">
+				  	<div class="staff-container">
+				  		{% for image in entry.foto %}
+					    	<img src="{{ image.getUrl() }}" alt="">
+					    {% endfor %}
+					    <div class="staff-title-bar">
+					    	<h1>{{ entry.title }}</h1>
+					    	{% for item in entry.functies %}
+					    		<h2>{{ item.functies }}</h2>
+					    	{% endfor %}
+					    </div>
+					    <div class="staff-content">
+						    <h3>Affiliatie</h3>
+						    {% for item in entry.affiliaties %}
+						    	<p>{{ item.affiliaties }}</p>
+						    {% endfor %}
+					    </div>
+					    <div class="staff-content">
+						    <h3>Kantoor</h3>
+						    {{ entry.kantoor }}
+					    </div>
+					    <div class="staff-content">
+						    <h3>{{ entry.email }}</h3>
+						    <p>Tel. {{ entry.telefoon }}</p>
+						    <p>Fax {{ entry.fax }}</p>
+					    </div>
+					    <div class="staff-icons-wrapper">
+					    	<div class="staff-icons">
+					    		{% if entry.facebook %}
+						    		<a class="staff-icon" href="{{ entry.facebook }}"><i class="fa fa-facebook-square"></i></a>
+						    	{% endif %}
+						    	{% if entry.linkedin %}
+						    		<a class="staff-icon" href="{{ entry.linkedin }}"><i class="fa fa-linkedin-square"></i></a>
+						    	{% endif %}
+						    	{% if entry.researchgate %}
+						    		<a class="staff-icon" href="{{ entry.researchgate }}"><img src="{{ craft.config.environmentVariables.assetsBaseUrl }}img/global/researchgate.gif"></a>
+						    	{% endif %}
+						    	{% if entry.ugentBibliografie %}
+						    		<a class="staff-icon" href="{{ entry.ugentBibliografie }}"><i class="fa fa-university"></i></a>
+						    	{% endif %}
+					    	</div>
+					    </div>
+				    </div>
+				  </div>
+				  {% endfor %}
+				</div>
+			
+		</div>
+	</div>
+
+</section>
+{% endblock %}

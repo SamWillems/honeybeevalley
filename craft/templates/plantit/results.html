@@ -1,5 +1,8 @@
 {% extends "_layout" %}
-
+{% block head %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ craft.config.environmentVariables.assetsBaseUrl }}slick/slick.css" />
+{% endblock %}
 {% block content %}
 
 {% set asset = headers.plantItHeaderBeeld.first() %}
@@ -26,15 +29,15 @@
 {% set licht = craft.request.getParam('licht') ? craft.request.getParam('licht') : '' %}
 {% set vocht = craft.request.getParam('vocht') ? craft.request.getParam('vocht') : '' %}
 {% set bijen1 = craft.request.getParam('bijen1') ? craft.request.getParam('bijen1') : '' %}
-{% set bijtemp = bijen1 ? bijen1 : '' %}
-{% set bijen = bijen1 ?  'nectarEnPollenleverancier' : '' %}
+{% set bijtemp = bijen1 ? 'nectar' : '' %}
 {% set bijen2 = craft.request.getParam('bijen2') ? craft.request.getParam('bijen2') : '' %}
 {% if bijtemp %}
-	{% set bijtemp = bijen2 ?  'nectarEnPollenleverancier' : bijtemp %}
+	{% set bijtemp = bijen2 ? 'nectar- en pollenleverancier' : bijtemp %}
 {% else %}
-	{% set bijen = bijen2 ? 'nectarEnPollenleverancier' : '' %}
 	{% set bijtemp = bijen2 ? bijen2 : '' %}
 {% endif %}
+{% set plant = craft.request.getParam('plant') ? craft.request.getParam('plant') : '' %}
+{% set pagina = craft.request.getParam('plant') ? craft.request.getParam('plant') : '1' %}
 
 <section class="hb-main-content">
 	<div class="row">
@@ -43,7 +46,7 @@
 			<div class="side-nav-wrapper callout">
 				<h4>Zoeken op naam</h4>
 				<!-- Zoeken op naam form -->
-				<form>
+				<form action="/plantit/results/p1">
 					<div class="row">
 					    <div class="medium-12 columns">
 					        <input type="search" onchange="this.form.submit()" name="naam" placeholder="Zoeken" value="{{ naam }}"<br>
@@ -61,7 +64,9 @@
 						<input onchange="this.form.submit()" id="checkbox-inheems" type="radio" name="oorsprong" value="inheems" {{ oorsprong=='inheems' ? 'checked' }}>
 						<label for="checkbox-inheems">Inheems</label><br>
 						<input onchange="this.form.submit()" id="checkbox-uitheems" type="radio" name="oorsprong" value="uitheems" {{ oorsprong=='uitheems' ? 'checked' }}>
-						<label for="checkbox-uitheems">Uitheems</label>
+						<label for="checkbox-uitheems">Uitheems</label><br>
+						<input onchange="this.form.submit()" id="checkbox-uitheems" type="radio" name="oorsprong" value="">
+				    	<label for="checkbox-uitheems">Niet gespecifieerd</label>
 					</fieldset>
 
 					<label>Groep
@@ -147,9 +152,9 @@
 						<label>PH
 						  <select name="ph" onchange="this.form.submit()">
 							<option></option>
-						    <option value="zuurminnend" {{ ph=='zuurminnend' ? 'Selected' }}>Zuurminnend</option>
+						    <option value="zuur" {{ ph=='zuur' ? 'Selected' }}>Zuurminnend</option>
 						    <option value="neutraal" {{ ph=='neutraal' ? 'Selected' }}>Neutraal</option>
-						    <option value="kalkminnend" {{ ph=='kalkminnend' ? 'Selected' }}>Kalkminnend</option>
+						    <option value="kalk" {{ ph=='kalk' ? 'Selected' }}>Kalkminnend</option>
 						  </select>
 						</label>
 
@@ -159,8 +164,8 @@
 						    <option value="droog" {{ vocht=='droog' ? 'Selected' }}>Droog</option>
 						    <option value="gemiddeld" {{ vocht=='gemiddeld' ? 'Selected' }}>Gemiddeld</option>
 						    <option value="vochthoudend" {{ vocht=='vochthoudend' ? 'Selected' }}>Vochthoudend</option>
-						    <option value="sterkWisselendeOmstandigheden" {{ vocht=='sterkWisselendeOmstandigheden' ? 'Selected' }}>sterk wisselende omstandigheden</option>
-						    <option value="regelmatigOverstroomdeBodems" {{ vocht=='regelmatigOverstroomdeBodems' ? 'Selected' }}>regelmatig overstroomde bodems</option>
+						    <option value="sterk wisselende omstandigheden" {{ vocht=='sterk wisselende omstandigheden' ? 'Selected' }}>sterk wisselende omstandigheden</option>
+						    <option value="regelmatig overstroomde bodems" {{ vocht=='regelmatig overstroomde bodems' ? 'Selected' }}>regelmatig overstroomde bodems</option>
 						  </select>
 						</label>
 
@@ -179,14 +184,11 @@
 		</div>
 
 		<div class="small-12 medium-8 large-9 columns">
-			<h3 class="article-title">Zoekresultaten</h3>
-			<div class="article-body-text">
-			
 			{% set results = craft.entries({
 				section: 'plantIt',
-				order: 'score',
+				order: 'title',
 				
-				search: 'naam:*'~ naam ~'* OR latijns:*'~ naam ~'* bijenvriendelijkheid:*'~ bijtemp ~'* OR bijenvriendelijkheid:*'~ bijen ~'*',
+				search: 'naam:*'~ naam ~'* OR latijns:*'~ naam ~'* bijenvriendelijkheid:*'~ bijtemp ~'*',
 				inheems: [
 				  'and',
 				  '= *'~ oorsprong ~'*'
@@ -225,72 +227,262 @@
 				]
 			}) %}
 
-			{% if results|length %}
-			    {% paginate results.limit(20) as pageInfo, res %}
-				<p>Resultaten - Pagina {{pageInfo.currentPage}} van {{ pageInfo.totalPages }}</p>
-				<div class="row small-up-2 medium-up-3 large-up-4">
-				
-				    
+			{% if results|length %}			    
+				{% set queryString = (craft.request.getQueryStringWithoutPath() ? '?'~craft.request.getQueryStringWithoutPath()) %}
+				{% if plant %}
+					{% paginate results.limit(1) as pageInfo, res %}
+					<h3 class="article-title"><a href="p{{plant}}{{queryString}}&plant=">Zoekresultaten</a> - Plant {{pageInfo.currentPage}} van {{ pageInfo.totalPages }}</h3>
 					{% for entry in res %}
-					<div class="column">
-						<a href="{{ entry.url }}">
-							{% set image = entry.fotos.first() %}
-							{# checken of dat er daadwerkelijk een beeld is. #}
-							{% if image %}
-								<img src="{{ image.getUrl('plantItThumb') }}" class="thumbnail plantit-thumb" alt="{{ entry.naam }}">
-							{% else %}
-								<img src="{{ craft.config.environmentVariables.assetsBaseUrl }}img/plantit/no-image-available.jpg" class="thumbnail plantit-thumb" alt="{{ entry.naam }}">
-							{% endif %}
-							<p class="plantit-name">
-								{# checken of dat er daadwerkelijk een naam ingevuld is. #}
-								{% if entry.naam %}
-									{{ entry.naam }}<br>
-								{% endif %}
-								{# checken of dat er daadwerkelijk een latijnse naam ingevuld is. #}
-								{% if entry.latijns %}
-									<em>{{ entry.latijns }}</em>
-								{% endif %}
-							</p>
-						</a>
-					</div>	
-					{% endfor %}
-
-				</div>
-				
-					<ul class="pagination text-center" role="navigation" aria-label="Pagination">
-						{% set queryString = (craft.request.getQueryStringWithoutPath() ? '?'~craft.request.getQueryStringWithoutPath()) %}
-
-						<li class="pagination-previous"><a href="{{ pageInfo.firstUrl }}{{ queryString }}">Eerste pagina</a></li>
+						<h3 class="article-title">{{entry.naam}}<span class="plantit-latijnse-titel"><em>{{entry.latijns}}</em></span></h3>
 						
-						{% if pageInfo.prevUrl %}
-							<li class="pagination-previous"><a href="{{ pageInfo.prevUrl }}{{ queryString }}">Vorige </a> <span class="show-for-sr">page</span></li>
-						{% else %}
-							<li class="pagination-previous disabled">Vorige <span class="show-for-sr">page</span></li>
-						{% endif %}
+						<!-- Start 2 Kolommen -->
+						<div class="row">
+							<div class="small-12 medium-5 columns">
+							{% set image = entry.fotos %}
+							<div class="plantit-slider">
+								{% for image in entry.fotos %}
+								<div><img class="article-image" src="{{ image.getUrl('plantIt') }}" alt="{{entry.naam}}"></div>
+								{% endfor %} 
+							</div>
+							
+							{% set image = entry.fotos %}
+							<div class="plantit-slider-nav slick-slider">
+								{% for image in entry.fotos %}
+								<div><img class="plantit-slide-thumb" src="{{ image.getUrl('plantItThumb') }}" alt="{{entry.naam}}"></div>
+								{% endfor %}
+							</div>
 
-						{% for page, url in pageInfo.getPrevUrls(3) %}
-							<li><a href="{{ url }}{{ queryString }}">{{ page }}</a></li>
+							</div>
+							<div class="small-12 medium-7 columns">
+								<table class="hover">
+								  <tbody>
+									{% if entry.latijns %}
+										<tr>
+										  <td><strong>Latijnse Naam</strong></td>
+										  <td>{{ entry.latijns }}</td>
+										</tr>
+									{% endif %}
+									{% if entry.naam %}
+										<tr>
+										  <td><strong>Naam</strong></td>
+										  <td>{{ entry.naam }}</td>
+										</tr>
+									{% endif %}
+									{% if entry.inheems %}
+										<tr>
+										  <td><strong>Oorsprong</strong></td>
+											<td>
+											{% for option in entry.inheems %}
+												{{ option.label }}{{ loop.index < loop.length ? ', ' }} 
+											{% endfor %}
+											</td>
+										</tr>
+									{% endif %}
+									<tr>
+									  <td><strong>Familie</strong></td>
+									  <td>{{ entry.familie }}  </td>
+									</tr>
+									<tr>
+									  <td><strong>Groep</strong></td>
+										<td>
+										{% for option in entry.groep %}
+											{{ option.label }}{{ loop.index < loop.length ? ', ' }} 
+										{% endfor %}
+										</td>
+									</tr>
+									<tr>
+									  <td><strong>Bloemkleur - groep</strong></td>
+										<td>
+										{% for option in entry.bloemkleur %}
+											{{ option.label }}{{ loop.index < loop.length ? ', ' }} 
+										{% endfor %}
+										</td>
+									</tr>
+									<tr>
+									  <td><strong>Bloemkleur - detail</strong></td>
+									  <td>{{ entry.bloemkleurdetail }}</td>
+									</tr>
+									<tr>
+									  <td><strong>Bladkleur</strong></td>
+									  <td>{{ entry.bladkleur }}</td>
+									</tr>
+									<tr>
+									  <td><strong>Bloeimaand</strong></td>
+									  <td>
+										{% for option in entry.bloeimaand %}
+											{{ option.label }}{{ loop.index < loop.length ? ', ' }} 
+										{% endfor %}
+										</td>
+									</tr>
+									<tr>
+									  <td><strong>Hoogte - groep</strong></td>
+									  <td>
+										{% for option in entry.hoogte %}
+											{{ option.label }}{{ loop.index < loop.length ? ', ' }} 
+										{% endfor %}
+										</td>
+									</tr>
+									<tr>
+									  <td><strong>Hoogte - detail</strong></td>
+									  <td>
+										{{ entry.hoogtedetail }}
+										</td>
+									</tr>
+									<tr>
+									  <td><strong>Habitat - Licht</strong></td>
+									  <td>
+										{% for option in entry.habitatLicht %}
+											{{ option.label }}{{ loop.index < loop.length ? ', ' }} 
+										{% endfor %}
+										</td>
+									</tr>
+									<tr>
+									  <td><strong>Habitat - Grondsoort</strong></td>
+									  <td>
+										{% for option in entry.habitatGrondsoort %}
+											{{ option.label }}{{ loop.index < loop.length ? ', ' }} 
+										{% endfor %}
+										</td>
+									</tr>
+									<tr>
+									  <td><strong>Habitat - pH</strong></td>
+									  <td>
+										{% for option in entry.habitatPh %}
+											{{ option.label }}{{ loop.index < loop.length ? ', ' }} 
+										{% endfor %}
+										</td>
+									</tr>
+									<tr>
+									  <td><strong>Habitat - Vochtigheid</strong></td>
+									  <td>
+										{% for option in entry.habitatVochtigheid %}
+											{{ option.label }}{{ loop.index < loop.length ? ', ' }} 
+										{% endfor %}
+										</td>
+									</tr>
+									<tr>
+									  <td><strong>Bijenvriendelijkheid</strong></td>
+									  <td>
+										{% for option in entry.bijenvriendelijkheid %}
+											{{ option.label }}{{ loop.index < loop.length ? ', ' }} 
+										{% endfor %}
+										</td>
+									</tr>
+									<tr>
+									  <td><strong>Bijenvriendelijkheid - detail</strong></td>
+									  <td>{{ entry.bijenvriendelijkheidsdetail }}</td>
+									</tr>
+									<tr>
+									  <td><strong>Referenties</strong></td>
+									  <td>{{ entry.referenties }}</td>
+									</tr>
+									<tr>
+									  <td><strong>Cultivars</strong></td>
+									  <td>{{ entry.cultivars }}  </td>
+									</tr>
+								  </tbody>
+								</table>
+							</div>
+						</div>
+						<!-- Einde 2 Kolommen -->
+					{% endfor %}
+					
+					<ul class="pagination text-center" role="navigation" aria-label="Pagination">
+							
+							{% if pageInfo.prevUrl %}
+								<li class="pagination-previous"><a href="{{ pageInfo.prevUrl }}{{ queryString }}">Vorige </a> <span class="show-for-sr">page</span></li>
+							{% else %}
+								<li class="pagination-previous disabled">Vorige <span class="show-for-sr">page</span></li>
+							{% endif %}
+
+							{% for page, url in pageInfo.getPrevUrls(3) %}
+								<li><a href="{{ url }}{{ queryString }}">{{ page }}</a></li>
+							{% endfor %}
+
+							<li class="current">{{ pageInfo.currentPage }}</li>
+
+							{% for page, url in pageInfo.getNextUrls(3) %}
+								<li><a href="{{ url }}{{ queryString }}">{{ page }}</a></li>
+							{% endfor %}
+
+							{% if pageInfo.nextUrl %}
+								<li class="pagination-next"><a href="{{ pageInfo.nextUrl }}{{ queryString }}">Volgende</a></li>
+							{% else %}
+								<li class="pagination-next disabled">Volgende <span class="show-for-sr">page</span></li>	
+							{% endif %}
+
+						</ul>
+				{% else %}
+					{% paginate results.limit(20) as pageInfo, res %}
+					<h3 class="article-title">Zoekresultaten - Pagina {{pageInfo.currentPage}} van {{ pageInfo.totalPages }}</h3>
+					<div class="row small-up-2 medium-up-3 large-up-4">
+					
+						
+						{% for entry in res %}
+						{% set position = results.positionedBefore(entry).total() + 1 %}
+						<div class="column">
+							<a href="p{{position}}{{queryString}}&plant={{pageInfo.currentPage}}">
+								{% set image = entry.fotos.first() %}
+								{# checken of dat er daadwerkelijk een beeld is. #}
+								{% if image %}
+									<img src="{{ image.getUrl('plantItThumb') }}" class="thumbnail plantit-thumb" alt="{{ entry.naam }}">
+								{% else %}
+									<img src="{{ craft.config.environmentVariables.assetsBaseUrl }}img/plantit/no-image-available.jpg" class="thumbnail plantit-thumb" alt="{{ entry.naam }}">
+								{% endif %}
+								<p class="plantit-name">
+									{# checken of dat er daadwerkelijk een naam ingevuld is. #}
+									{% if entry.naam %}
+										{{ entry.naam }}<br>
+									{% endif %}
+									{# checken of dat er daadwerkelijk een latijnse naam ingevuld is. #}
+									{% if entry.latijns %}
+										<em>{{ entry.latijns }}</em>
+									{% endif %}
+								</p>
+							</a>
+						</div>	
 						{% endfor %}
 
-						<li class="current">{{ pageInfo.currentPage }}</li>
+					</div>
+					
+						<ul class="pagination text-center" role="navigation" aria-label="Pagination">
+							<li class="pagination-previous"><a href="{{ pageInfo.firstUrl }}{{ queryString }}">Eerste pagina</a></li>
+							
+							{% if pageInfo.prevUrl %}
+								<li class="pagination-previous"><a href="{{ pageInfo.prevUrl }}{{ queryString }}">Vorige </a> <span class="show-for-sr">page</span></li>
+							{% else %}
+								<li class="pagination-previous disabled">Vorige <span class="show-for-sr">page</span></li>
+							{% endif %}
 
-						{% for page, url in pageInfo.getNextUrls(3) %}
-							<li><a href="{{ url }}{{ queryString }}">{{ page }}</a></li>
-						{% endfor %}
+							{% for page, url in pageInfo.getPrevUrls(3) %}
+								<li><a href="{{ url }}{{ queryString }}">{{ page }}</a></li>
+							{% endfor %}
 
-						{% if pageInfo.nextUrl %}
-							<li class="pagination-next"><a href="{{ pageInfo.nextUrl }}{{ queryString }}">Volgende</a></li>
-						{% else %}
-							<li class="pagination-next disabled">Volgende <span class="show-for-sr">page</span></li>	
-						{% endif %}
+							<li class="current">{{ pageInfo.currentPage }}</li>
 
-						<li class="pagination-next"><a href="{{ pageInfo.lastUrl }}{{ queryString }}">Laatste pagina</a></li>
-					</ul>	
+							{% for page, url in pageInfo.getNextUrls(3) %}
+								<li><a href="{{ url }}{{ queryString }}">{{ page }}</a></li>
+							{% endfor %}
+
+							{% if pageInfo.nextUrl %}
+								<li class="pagination-next"><a href="{{ pageInfo.nextUrl }}{{ queryString }}">Volgende</a></li>
+							{% else %}
+								<li class="pagination-next disabled">Volgende <span class="show-for-sr">page</span></li>	
+							{% endif %}
+
+							<li class="pagination-next"><a href="{{ pageInfo.lastUrl }}{{ queryString }}">Laatste pagina</a></li>
+						</ul>	
 				
-				
+				{% endif %}
 			{% else %}
 				<p>Geen resultaten gevonden</p>
 			{% endif %}
 		</div>
 </section>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ craft.config.environmentVariables.assetsBaseUrl }}slick/slick.min.js"></script>
+    <script type="text/javascript" src="{{ craft.config.environmentVariables.assetsBaseUrl }}slick/plantit.js"></script>
 {% endblock %}

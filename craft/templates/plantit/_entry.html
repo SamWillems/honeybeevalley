@@ -23,7 +23,7 @@
 			<div class="side-nav-wrapper callout">
 				<h4>Zoeken op naam</h4>
 				<!-- Zoeken op naam form -->
-				<form action="{{ url('plantit/results') }}">	
+				<form action="/plantit/results/p1">	
 					<div class="row">
 					    <div class="medium-12 columns">
 					        <input type="search" onchange="this.form.submit()" name="naam" placeholder="Zoeken" value=""<br>
@@ -208,10 +208,6 @@
 					      <td>{{ entry.familie }}  </td>
 					    </tr>
 					    <tr>
-					      <td><strong>Cultivars</strong></td>
-					      <td>{{ entry.cultivars }}  </td>
-					    </tr>
-					    <tr>
 					      <td><strong>Groep</strong></td>
 							<td>
 							{% for option in entry.groep %}
@@ -220,7 +216,7 @@
 							</td>
 					    </tr>
 					    <tr>
-					      <td><strong>Bloemkleur</strong></td>
+					      <td><strong>Bloemkleur - groep</strong></td>
 					        <td>
 							{% for option in entry.bloemkleur %}
 								{{ option.label }}{{ loop.index < loop.length ? ', ' }} 
@@ -228,7 +224,7 @@
 							</td>
 					    </tr>
 					    <tr>
-					      <td><strong>Bloemkleurdetail</strong></td>
+					      <td><strong>Bloemkleur - detail</strong></td>
 					      <td>{{ entry.bloemkleurdetail }}</td>
 					    </tr>
 					    <tr>
@@ -244,7 +240,7 @@
 							</td>
 					    </tr>
 					    <tr>
-					      <td><strong>Hoogte</strong></td>
+					      <td><strong>Hoogte - groep</strong></td>
 					      <td>
 							{% for option in entry.hoogte %}
 								{{ option.label }}{{ loop.index < loop.length ? ', ' }} 
@@ -252,7 +248,7 @@
 							</td>
 					    </tr>
 					    <tr>
-					      <td><strong>Hoogtedetail</strong></td>
+					      <td><strong>Hoogte - detail</strong></td>
 					      <td>
 							{{ entry.hoogtedetail }}
 							</td>
@@ -266,7 +262,7 @@
 							</td>
 					    </tr>
 					    <tr>
-					      <td><strong>Habitat - grondsoort</strong></td>
+					      <td><strong>Habitat - Grondsoort</strong></td>
 					      <td>
 							{% for option in entry.habitatGrondsoort %}
 								{{ option.label }}{{ loop.index < loop.length ? ', ' }} 
@@ -298,14 +294,17 @@
 							</td>
 					    </tr>
 					    <tr>
-					      <td><strong>Bijenvriendelijkheidsdetail</strong></td>
+					      <td><strong>Bijenvriendelijkheid - detail</strong></td>
 					      <td>{{ entry.bijenvriendelijkheidsdetail }}</td>
 					    </tr>
 					    <tr>
 					      <td><strong>Referenties</strong></td>
 					      <td>{{ entry.referenties }}</td>
 					    </tr>
-
+						<tr>
+					      <td><strong>Cultivars</strong></td>
+					      <td>{{ entry.cultivars }}  </td>
+					    </tr>
 					  </tbody>
 					</table>
 				</div>

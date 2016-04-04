@@ -19,13 +19,13 @@
 			<div class="side-nav-wrapper callout">
 				<h4>Zoeken op naam</h4>
 				<!-- Zoeken op naam form -->
-				<form action="{{ url('plantit/results') }}">
+				<form action="/plantit/results/p1">
 					<div class="row">
 					    <div class="medium-12 columns">
 					        <input type="search" onchange="this.form.submit()" name="naam" placeholder="Zoeken"><br>
 					    </div>
 				  	</div>
-				  	<a class="expanded secondary button" href="#">Zoeken</a>
+				  	<a class="expanded secondary button" onclick="this.form.submit()">Zoeken</a>
 				
 				<br>
 				<!-- Zoeken op criteria form -->
@@ -34,9 +34,11 @@
 				  	<fieldset class="fieldset">
 						<legend>Oorsprong</legend>
 						<input onchange="this.form.submit()" id="checkbox-inheems" type="radio" name="oorsprong" value="inheems">
-				    						<label for="checkbox-inheems">Inheems</label><br>
-				    						<input onchange="this.form.submit()" id="checkbox-uitheems" type="radio" name="oorsprong" value="uitheems">
-				    						<label for="checkbox-uitheems">Uitheems</label>
+				    	<label for="checkbox-inheems">Inheems</label><br>
+				    	<input onchange="this.form.submit()" id="checkbox-uitheems" type="radio" name="oorsprong" value="uitheems">
+				    	<label for="checkbox-uitheems">Uitheems</label><br>
+						<input onchange="this.form.submit()" id="checkbox-uitheems" type="radio" name="oorsprong" value="">
+				    	<label for="checkbox-uitheems">Niet gespecifieerd</label>
 					</fieldset>
 
 					<label>Groep
@@ -121,9 +123,9 @@
 						<label>PH
 						  <select name="ph" onchange="this.form.submit()">
 							<option></option>
-						    <option value="zuurminnend" >Zuurminnend</option>
+						    <option value="zuur" >Zuurminnend</option>
 						    <option value="neutraal" >Neutraal</option>
-						    <option value="kalkminnend" >Kalkminnend</option>
+						    <option value="kalk" >Kalkminnend</option>
 						  </select>
 						</label>
 
@@ -133,8 +135,8 @@
 						    <option value="droog" >Droog</option>
 						    <option value="gemiddeld" >Gemiddeld</option>
 						    <option value="vochthoudend" >Vochthoudend</option>
-						    <option value="sterkWisselendeOmstandigheden" >sterk wisselende omstandigheden</option>
-						    <option value="regelmatigOverstroomdeBodems" >regelmatig overstroomde bodems</option>
+						    <option value="sterk wisselende omstandigheden" >sterk wisselende omstandigheden</option>
+						    <option value="regelmatig overstroomde bodems" >regelmatig overstroomde bodems</option>
 						  </select>
 						</label>
 
@@ -146,7 +148,7 @@
 					  <input id="Pollenleverancier" type="checkbox" name="bijen2" onchange="this.form.submit()" value="pollenleverancier" ><label for="Pollenleverancier">Pollenleverancier</label><br>
 					</fieldset>
 
-					<a class="expanded secondary button" href="#" onclick="this.form.submit()">Zoeken</a>
+					<a class="expanded secondary button" onclick="this.form.submit()">Zoeken</a>
 
 				</form> 
 			</div>
